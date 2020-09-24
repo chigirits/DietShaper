@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setenv
+        run: |
+          echo "::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF#refs/tags/})"
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Prepare Build
+        run: |
+          mkdir -p project/Assets/Chigiri/DietShaper build
+          cp -a {Editor,Materials,Prefabs,Scripts,README.md}{,.meta} LICENSE project/Assets/Chigiri/DietShaper/
+
+          cat <<EOT >project/Assets/Chigiri.meta
+          fileFormatVersion: 2
+          guid: e9cc3dda85f79b140bbf7d079362bf77
+          folderAsset: yes
+          DefaultImporter:
+            externalObjects: {}
+            userData: 
+            assetBundleName: 
+            assetBundleVariant: 
+          EOT
+
+          cat <<EOT >project/Assets/Chigiri/DietShaper.meta
+          fileFormatVersion: 2
+          guid: a052227af53fd154ab182be99547a9d9
+          folderAsset: yes
+          DefaultImporter:
+            externalObjects: {}
+            userData: 
+            assetBundleName: 
+            assetBundleVariant: 
+          EOT
+
+          cat <<EOT >project/Assets/Chigiri/DietShaper/LICENSE.meta
+          fileFormatVersion: 2
+          guid: 6017c3f9b3ea92145b4a494e8619f1a9
+          DefaultImporter:
+            externalObjects: {}
+            userData: 
+            assetBundleName: 
+            assetBundleVariant: 
+          EOT
+
+          cd project
+          find Assets -name \*.meta > ../metaList
+          cd ..
+
+      - name: create-unitypackage
+        uses: pCYSl5EDgo/create-unitypackage@v1
+        with:
+          project-folder: ./project/
+          package-path: build/DietShaper-${{ env.RELEASE_VERSION }}.unitypackage
+          include-files: metaList
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: unitypackage
+          path: build/DietShaper-${{ env.RELEASE_VERSION }}.unitypackage
+
+      - name: Release
+        uses: fnkr/github-action-ghr@v1
+        if: |
+          !contains(github.ref, '-')
+        env:
+          GHR_PATH: build/DietShaper-${{ env.RELEASE_VERSION }}.unitypackage
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

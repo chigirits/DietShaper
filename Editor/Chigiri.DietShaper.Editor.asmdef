@@ -1,0 +1,10 @@
+﻿{
+	"name": "Chigiri.DietShaper.Editor",
+    "references": [
+        "Chigiri.DietShaper"
+    ],
+	"includePlatforms": [
+		"Editor"
+	],
+    "autoReferenced": true
+}
