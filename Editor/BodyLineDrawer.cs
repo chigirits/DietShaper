@@ -42,9 +42,9 @@ namespace Chigiri.DietShaper.Editor
                 }
                 EditorGUI.PropertyField(rect, property.FindPropertyRelative("isLeaf"), new GUIContent("Is Leaf", ""));
                 rect.y += height + spacing;
-                EditorGUI.Slider(rect, property.FindPropertyRelative("startMargin"), 0f, 0.5f, new GUIContent("Start Margin", ""));
+                EditorGUI.Slider(rect, property.FindPropertyRelative("startMargin"), 0f, 0.499f, new GUIContent("Start Margin", ""));
                 rect.y += height + spacing;
-                EditorGUI.Slider(rect, property.FindPropertyRelative("endMargin"), 0f, 0.5f, new GUIContent("End Margin", ""));
+                EditorGUI.Slider(rect, property.FindPropertyRelative("endMargin"), 0f, 0.499f, new GUIContent("End Margin", ""));
                 rect.y += height + spacing;
                 EditorGUI.indentLevel--;
             }
