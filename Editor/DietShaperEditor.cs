@@ -153,12 +153,27 @@ namespace Chigiri.DietShaper.Editor
             {
                 return "Source Mesh を指定してください";
             }
+            for (var i = 0; i < shapeKeys.arraySize; i++)
+            {
+                var shapeKey = shapeKeys.GetArrayElementAtIndex(i);
+                var enable = shapeKey.FindPropertyRelative("enable").boolValue;
+                if (!enable) continue;
+                var name = shapeKey.FindPropertyRelative("name").stringValue;
+                for (var j = 0; j < self.sourceMesh.blendShapeCount; j++)
+                {
+                    if (name == self.sourceMesh.GetBlendShapeName(j))
+                    {
+                        return $"Source Mesh には {name} というシェイプキーが既に定義されています。 " +
+                            "名前を変更するか、または処理済みのメッシュが指定されていないかを確認してください";
+                    }
+                }
+            }
             return "";
         }
 
         void RevertTarget()
         {
-            Undo.RecordObject(self.targetRenderer, "Revert Target (MeshHoleShrinker)");
+            Undo.RecordObject(self.targetRenderer, "Revert Target (DietShaper)");
             self.targetRenderer.sharedMesh = self.sourceMesh;
         }
 

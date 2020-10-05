@@ -64,6 +64,11 @@ public class Helper
         return result;
     }
 
+    public static float Vector2Cross(Vector2 lhs, Vector2 rhs)
+    {
+        return lhs.x * rhs.y - lhs.y * rhs.x;
+    }
+
     // From https://forum.unity.com/threads/bakemesh-scales-wrong.442212/#post-2860559
     public static Vector3[] GetPosedVertices(SkinnedMeshRenderer skin, Mesh sharedMesh)
     {

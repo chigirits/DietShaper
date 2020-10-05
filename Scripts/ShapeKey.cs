@@ -15,8 +15,8 @@ namespace Chigiri.DietShaper
         public float radius = 0.1f;
         public AnimationCurve shape = new AnimationCurve(
             new Keyframe(0f, 1f),
-            new Keyframe(0.1f, 0f),
-            new Keyframe(0.9f, 0f),
+            new Keyframe(0.2f, 0f),
+            new Keyframe(0.8f, 0f),
             new Keyframe(1f, 1f)
         );
         public Color gizmoColor = Color.green;
