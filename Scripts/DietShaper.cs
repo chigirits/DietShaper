@@ -19,7 +19,7 @@ namespace Chigiri.DietShaper
 
             new ShapeKey {
                 name = "Diet.Hips",
-                radius = 0.1f,
+                radius = 0.15f,
                 gizmoColor = Color.blue,
                 bodyLines = new List<BodyLine>{
                     new BodyLine(0f, 0.35f, HumanBodyBones.Hips, HumanBodyBones.LeftUpperLeg, HumanBodyBones.LeftLowerLeg),
@@ -47,11 +47,12 @@ namespace Chigiri.DietShaper
 
             new ShapeKey {
                 name = "Diet.Shoulders",
-                radius = 0.05f,
+                // enable = false,
+                radius = 0.08f,
                 gizmoColor = Color.yellow,
                 bodyLines = new List<BodyLine>{
-                    new BodyLine(0f, 0.35f, HumanBodyBones.LeftShoulder, HumanBodyBones.LeftUpperArm, HumanBodyBones.LeftLowerArm),
-                    new BodyLine(0f, 0.35f, HumanBodyBones.RightShoulder, HumanBodyBones.RightUpperArm, HumanBodyBones.RightLowerArm)
+                    new BodyLine(0.35f, 0.35f, HumanBodyBones.Neck, HumanBodyBones.LeftUpperArm, HumanBodyBones.LeftLowerArm),
+                    new BodyLine(0.35f, 0.35f, HumanBodyBones.Neck, HumanBodyBones.RightUpperArm, HumanBodyBones.RightLowerArm)
                 }
             },
 
@@ -95,7 +96,7 @@ namespace Chigiri.DietShaper
                 },
                 shape = new AnimationCurve(
                     new Keyframe(0f, 1f),
-                    new Keyframe(0.1f, 0f),
+                    new Keyframe(0.2f, 0f),
                     new Keyframe(1f, 0f)
                 )
             },
@@ -140,7 +141,7 @@ namespace Chigiri.DietShaper
                 },
                 shape = new AnimationCurve(
                     new Keyframe(0f, 1f),
-                    new Keyframe(0.1f, 0f),
+                    new Keyframe(0.2f, 0f),
                     new Keyframe(1f, 0f)
                 )
             }

@@ -63,7 +63,7 @@ MonoBehaviour:
       endMargin: 0.35
       _index: 0
       _isOpen: 0
-    radius: 0.1
+    radius: 0.15
     shape:
       serializedVersion: 2
       m_Curve:
@@ -77,7 +77,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.1
+        time: 0.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -86,7 +86,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.9
+        time: 0.8
         value: 0
         inSlope: 0
         outSlope: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.1
+        time: 0.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.9
+        time: 0.8
         value: 0
         inSlope: 0
         outSlope: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.1
+        time: 0.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.9
+        time: 0.8
         value: 0
         inSlope: 0
         outSlope: 0
@@ -219,19 +219,19 @@ MonoBehaviour:
   - enable: 1
     name: Diet.Shoulders
     bodyLines:
-    - bones: 0b0000000d0000000f000000
+    - bones: 090000000d0000000f000000
       isLeaf: 0
-      startMargin: 0
+      startMargin: 0.1
       endMargin: 0.35
       _index: 0
       _isOpen: 0
-    - bones: 0c0000000e00000010000000
+    - bones: 090000000e00000010000000
       isLeaf: 0
-      startMargin: 0
+      startMargin: 0.1
       endMargin: 0.35
       _index: 0
       _isOpen: 0
-    radius: 0.05
+    radius: 0.08
     shape:
       serializedVersion: 2
       m_Curve:
@@ -245,7 +245,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.1
+        time: 0.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -254,7 +254,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.9
+        time: 0.8
         value: 0
         inSlope: 0
         outSlope: 0
@@ -305,7 +305,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.1
+        time: 0.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -314,7 +314,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.9
+        time: 0.8
         value: 0
         inSlope: 0
         outSlope: 0
@@ -365,7 +365,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.1
+        time: 0.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -374,7 +374,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.9
+        time: 0.8
         value: 0
         inSlope: 0
         outSlope: 0
@@ -425,7 +425,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.1
+        time: 0.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -434,7 +434,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.9
+        time: 0.8
         value: 0
         inSlope: 0
         outSlope: 0
@@ -485,7 +485,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.1
+        time: 0.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -536,7 +536,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.1
+        time: 0.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -545,7 +545,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.9
+        time: 0.8
         value: 0
         inSlope: 0
         outSlope: 0
@@ -596,7 +596,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.1
+        time: 0.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -605,7 +605,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.9
+        time: 0.8
         value: 0
         inSlope: 0
         outSlope: 0
@@ -656,7 +656,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.1
+        time: 0.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -665,7 +665,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.9
+        time: 0.8
         value: 0
         inSlope: 0
         outSlope: 0
@@ -716,7 +716,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.1
+        time: 0.2
         value: 0
         inSlope: 0
         outSlope: 0
