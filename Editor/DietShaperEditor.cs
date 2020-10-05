@@ -156,6 +156,8 @@ namespace Chigiri.DietShaper.Editor
             for (var i = 0; i < shapeKeys.arraySize; i++)
             {
                 var shapeKey = shapeKeys.GetArrayElementAtIndex(i);
+                var enable = shapeKey.FindPropertyRelative("enable").boolValue;
+                if (!enable) continue;
                 var name = shapeKey.FindPropertyRelative("name").stringValue;
                 for (var j = 0; j < self.sourceMesh.blendShapeCount; j++)
                 {
