@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4384997553422468848}
-  - component: {fileID: 2370078416687663174}
+  - component: {fileID: 9105719668167982697}
   m_Layer: 0
   m_Name: DietShaper
   m_TagString: Untagged
@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4384997553422468850}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.075226754, y: 1.1626676, z: -0.060834557}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2370078416687663174
+--- !u!114 &9105719668167982697
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,16 +46,695 @@ MonoBehaviour:
   avatarRoot: {fileID: 0}
   targetRenderer: {fileID: 0}
   sourceMesh: {fileID: 0}
-  hipsKeyName: diet_hips
-  spineKeyName: diet_spine
-  chestKeyName: diet_chest
-  shouldersKeyName: diet_shoulders
-  upperArmsKeyName: diet_upper_arms
-  elbowsKeyName: diet_elbows
-  lowerArmsKeyName: diet_lower_arms
-  handsKeyName: diet_hands
-  upperLegsKeyName: diet_upper_legs
-  kneesKeyName: diet_knees
-  lowerLegsKeyName: diet_lower_legs
-  heelsKeyName: diet_heels
-  feetKeyName: diet_feet
+  alwaysShowGizmo: 0
+  shapeKeys:
+  - enable: 1
+    name: Diet.Hips
+    bodyLines:
+    - bones: 000000000100000003000000
+      isLeaf: 0
+      startMargin: 0
+      endMargin: 0.35
+      _index: 0
+      _isOpen: 0
+    - bones: 000000000200000004000000
+      isLeaf: 0
+      startMargin: 0
+      endMargin: 0.35
+      _index: 0
+      _isOpen: 0
+    radius: 0.1
+    shape:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.9
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    gizmoColor: {r: 0, g: 0, b: 1, a: 1}
+    _isOpen: 0
+  - enable: 1
+    name: Diet.Spine
+    bodyLines:
+    - bones: 0700000008000000
+      isLeaf: 0
+      startMargin: 0
+      endMargin: 0
+      _index: 0
+      _isOpen: 0
+    radius: 0.15
+    shape:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.9
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    gizmoColor: {r: 0, g: 1, b: 1, a: 1}
+    _isOpen: 0
+  - enable: 1
+    name: Diet.Chest
+    bodyLines:
+    - bones: 0800000009000000
+      isLeaf: 0
+      startMargin: 0
+      endMargin: 0
+      _index: 0
+      _isOpen: 0
+    radius: 0.15
+    shape:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.9
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    gizmoColor: {r: 0, g: 1, b: 0, a: 1}
+    _isOpen: 0
+  - enable: 1
+    name: Diet.Shoulders
+    bodyLines:
+    - bones: 0b0000000d0000000f000000
+      isLeaf: 0
+      startMargin: 0
+      endMargin: 0.35
+      _index: 0
+      _isOpen: 0
+    - bones: 0c0000000e00000010000000
+      isLeaf: 0
+      startMargin: 0
+      endMargin: 0.35
+      _index: 0
+      _isOpen: 0
+    radius: 0.05
+    shape:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.9
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    _isOpen: 0
+  - enable: 1
+    name: Diet.UpperArms
+    bodyLines:
+    - bones: 0d0000000f000000
+      isLeaf: 0
+      startMargin: 0
+      endMargin: 0
+      _index: 0
+      _isOpen: 0
+    - bones: 0e00000010000000
+      isLeaf: 0
+      startMargin: 0
+      endMargin: 0
+      _index: 0
+      _isOpen: 0
+    radius: 0.05
+    shape:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.9
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    gizmoColor: {r: 1, g: 0.46078432, b: 0.007843138, a: 1}
+    _isOpen: 0
+  - enable: 1
+    name: Diet.Elbows
+    bodyLines:
+    - bones: 0d0000000f00000011000000
+      isLeaf: 0
+      startMargin: 0.35
+      endMargin: 0.35
+      _index: 0
+      _isOpen: 0
+    - bones: 0e0000001000000012000000
+      isLeaf: 0
+      startMargin: 0.35
+      endMargin: 0.35
+      _index: 0
+      _isOpen: 0
+    radius: 0.05
+    shape:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.9
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+    _isOpen: 0
+  - enable: 1
+    name: Diet.LowerArms
+    bodyLines:
+    - bones: 0f00000011000000
+      isLeaf: 0
+      startMargin: 0
+      endMargin: 0
+      _index: 0
+      _isOpen: 0
+    - bones: 1000000012000000
+      isLeaf: 0
+      startMargin: 0
+      endMargin: 0
+      _index: 0
+      _isOpen: 0
+    radius: 0.05
+    shape:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.9
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    gizmoColor: {r: 1, g: 0, b: 1, a: 1}
+    _isOpen: 0
+  - enable: 1
+    name: Diet.Hands
+    bodyLines:
+    - bones: 1100000020000000
+      isLeaf: 1
+      startMargin: 0
+      endMargin: 0
+      _index: 0
+      _isOpen: 0
+    - bones: 120000002f000000
+      isLeaf: 1
+      startMargin: 0
+      endMargin: 0
+      _index: 0
+      _isOpen: 0
+    radius: 0.05
+    shape:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    gizmoColor: {r: 0, g: 0, b: 1, a: 1}
+    _isOpen: 0
+  - enable: 1
+    name: Diet.UpperLegs
+    bodyLines:
+    - bones: 0100000003000000
+      isLeaf: 0
+      startMargin: 0
+      endMargin: 0
+      _index: 0
+      _isOpen: 0
+    - bones: 0200000004000000
+      isLeaf: 0
+      startMargin: 0
+      endMargin: 0
+      _index: 0
+      _isOpen: 0
+    radius: 0.1
+    shape:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.9
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    gizmoColor: {r: 1, g: 0, b: 1, a: 1}
+    _isOpen: 0
+  - enable: 1
+    name: Diet.Knees
+    bodyLines:
+    - bones: 010000000300000005000000
+      isLeaf: 0
+      startMargin: 0.35
+      endMargin: 0.35
+      _index: 0
+      _isOpen: 0
+    - bones: 020000000400000006000000
+      isLeaf: 0
+      startMargin: 0.35
+      endMargin: 0.35
+      _index: 0
+      _isOpen: 0
+    radius: 0.1
+    shape:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.9
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+    _isOpen: 0
+  - enable: 1
+    name: Diet.LowerLegs
+    bodyLines:
+    - bones: 0300000005000000
+      isLeaf: 0
+      startMargin: 0
+      endMargin: 0
+      _index: 0
+      _isOpen: 0
+    - bones: 0400000006000000
+      isLeaf: 0
+      startMargin: 0
+      endMargin: 0
+      _index: 0
+      _isOpen: 0
+    radius: 0.1
+    shape:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.9
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    gizmoColor: {r: 1, g: 0.46078432, b: 0.007843138, a: 1}
+    _isOpen: 0
+  - enable: 1
+    name: Diet.Feet
+    bodyLines:
+    - bones: 0500000013000000
+      isLeaf: 1
+      startMargin: 0
+      endMargin: 0
+      _index: 0
+      _isOpen: 0
+    - bones: 0600000014000000
+      isLeaf: 1
+      startMargin: 0
+      endMargin: 0
+      _index: 0
+      _isOpen: 0
+    radius: 0.1
+    shape:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    _isOpen: 0

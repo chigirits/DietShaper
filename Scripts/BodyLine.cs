@@ -92,14 +92,15 @@ namespace Chigiri.DietShaper
         {
             Handles.color = color;
             Gizmos.color = color;
+            var rm = bones.Count - 1;
             for (var i = 1; i < bones.Count; i++)
             {
                 var bone0 = avatarRoot.GetBoneTransform(bones[i-1]);
                 var bone1 = avatarRoot.GetBoneTransform(bones[i]);
                 var b0 = bone0.position;
                 var b1 = bone1.position;
-                var begin = i == 1 ? Vector3.Lerp(b0, b1, startMargin) : b0;
-                var end = i == bones.Count-1 ? Vector3.Lerp(b1, b0, endMargin) : b1;
+                var begin = i == 1 ? Vector3.Lerp(b0, b1, startMargin*rm) : b0;
+                var end = i == bones.Count-1 ? Vector3.Lerp(b1, b0, endMargin*rm) : b1;
                 var center = (begin + end) * 0.5f;
                 var beginToEnd = end - begin;
                 var v01 = beginToEnd.normalized;
