@@ -153,12 +153,19 @@ namespace Chigiri.DietShaper.Editor
             {
                 return "Source Mesh を指定してください";
             }
+
+            var names = new Dictionary<string, bool>();
             for (var i = 0; i < shapeKeys.arraySize; i++)
             {
                 var shapeKey = shapeKeys.GetArrayElementAtIndex(i);
                 var enable = shapeKey.FindPropertyRelative("enable").boolValue;
                 if (!enable) continue;
                 var name = shapeKey.FindPropertyRelative("name").stringValue;
+                if (names.ContainsKey(name))
+                {
+                    return $"シェイプキー名 {name} が重複しています。異なる名前を指定してください";
+                }
+                names[name] = true;
                 for (var j = 0; j < self.sourceMesh.blendShapeCount; j++)
                 {
                     if (name == self.sourceMesh.GetBlendShapeName(j))
@@ -168,6 +175,7 @@ namespace Chigiri.DietShaper.Editor
                     }
                 }
             }
+
             return "";
         }
 
