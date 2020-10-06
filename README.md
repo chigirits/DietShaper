@@ -6,6 +6,8 @@
 
 Unity上でアバターに衣装を着せるとき、姿勢によって体の各部が衣装を貫通するのを防ぐなどの用途に有用です。
 
+![Banner](https://repository-images.githubusercontent.com/298298937/85faac80-0817-11eb-8cce-efd45fe7784d)
+
 ## 動作環境
 
 Unity 2018.4 以降
