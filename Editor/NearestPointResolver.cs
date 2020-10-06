@@ -184,8 +184,9 @@ namespace Chigiri.DietShaper.Editor
                 else
                     time = (t - m0) / mr;
             }
-            time = Mathf.Clamp(time, 0f, 1f);
-            result = Vector3.Lerp(result, v, key.shape.Evaluate(time));
+            var r = key.shape.Evaluate(time);
+            if (time < 0f || 1f < time) r = 1f;
+            result = Vector3.Lerp(result, v, r);
             return (result, distance);
         }
 
