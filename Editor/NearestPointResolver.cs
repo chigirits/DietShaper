@@ -172,7 +172,7 @@ namespace Chigiri.DietShaper.Editor
         }
 
         // 最も近いボーン線分への垂線の足を求める
-        public (Vector3, float) Resolve(Vector3 v)
+        public (Vector3, float, float) Resolve(Vector3 v)
         {
             var distance = Mathf.Infinity;
             var result = v;
@@ -189,7 +189,7 @@ namespace Chigiri.DietShaper.Editor
             var r = key.shape.Evaluate(time);
             if (time < 0f || 1f < time) r = 1f;
             result = Vector3.Lerp(result, v, r);
-            return (result, distance);
+            return (result, time, distance);
         }
 
     }

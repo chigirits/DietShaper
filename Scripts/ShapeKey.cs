@@ -12,7 +12,8 @@ namespace Chigiri.DietShaper
         public bool enable = true;
         public string name = "";
         public List<BodyLine> bodyLines = new List<BodyLine>();
-        public float radius = 0.1f;
+        public float startRadius = 0.1f;
+        public float endRadius = 0.1f;
         public AnimationCurve shape = new AnimationCurve(
             new Keyframe(0f, 1f),
             new Keyframe(0.2f, 0f),
@@ -28,7 +29,10 @@ namespace Chigiri.DietShaper
         public void DrawGizmos(Animator avatarRoot)
         {
             if (!enable) return;
-            foreach (var bodyLine in bodyLines) bodyLine.DrawGizmos(avatarRoot, radius, gizmoColor);
+            foreach (var bodyLine in bodyLines)
+            {
+                bodyLine.DrawGizmos(avatarRoot, startRadius, endRadius, gizmoColor);
+            }
         }
 
 #endif // UNITY_EDITOR
