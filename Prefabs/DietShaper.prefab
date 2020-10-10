@@ -53,17 +53,20 @@ MonoBehaviour:
     bodyLines:
     - bones: 000000000100000003000000
       isLeaf: 0
+      xSignRange: 0
       startMargin: 0
       endMargin: 0.35
       _index: 0
       _isOpen: 0
     - bones: 000000000200000004000000
       isLeaf: 0
+      xSignRange: 0
       startMargin: 0
       endMargin: 0.35
       _index: 0
       _isOpen: 0
-    radius: 0.15
+    startRadius: 0.15
+    endRadius: 0.15
     shape:
       serializedVersion: 2
       m_Curve:
@@ -113,11 +116,13 @@ MonoBehaviour:
     bodyLines:
     - bones: 000000000700000008000000
       isLeaf: 0
+      xSignRange: 0
       startMargin: 0
       endMargin: 0
       _index: 0
       _isOpen: 0
-    radius: 0.14
+    startRadius: 0.14
+    endRadius: 0.14
     shape:
       serializedVersion: 2
       m_Curve:
@@ -167,11 +172,13 @@ MonoBehaviour:
     bodyLines:
     - bones: 070000000800000009000000
       isLeaf: 0
+      xSignRange: 0
       startMargin: 0.35
       endMargin: 0
       _index: 0
       _isOpen: 0
-    radius: 0.13
+    startRadius: 0.13
+    endRadius: 0.13
     shape:
       serializedVersion: 2
       m_Curve:
@@ -221,17 +228,20 @@ MonoBehaviour:
     bodyLines:
     - bones: 090000000d0000000f000000
       isLeaf: 0
+      xSignRange: 0
       startMargin: 0.35
       endMargin: 0.35
       _index: 0
       _isOpen: 0
     - bones: 090000000e00000010000000
       isLeaf: 0
+      xSignRange: 0
       startMargin: 0.35
       endMargin: 0.35
       _index: 0
       _isOpen: 0
-    radius: 0.08
+    startRadius: 0.08
+    endRadius: 0.08
     shape:
       serializedVersion: 2
       m_Curve:
@@ -281,17 +291,20 @@ MonoBehaviour:
     bodyLines:
     - bones: 0d0000000f000000
       isLeaf: 0
+      xSignRange: 0
       startMargin: 0
       endMargin: 0
       _index: 0
       _isOpen: 0
     - bones: 0e00000010000000
       isLeaf: 0
+      xSignRange: 0
       startMargin: 0
       endMargin: 0
       _index: 0
       _isOpen: 0
-    radius: 0.07
+    startRadius: 0.07
+    endRadius: 0.07
     shape:
       serializedVersion: 2
       m_Curve:
@@ -341,17 +354,20 @@ MonoBehaviour:
     bodyLines:
     - bones: 0d0000000f00000011000000
       isLeaf: 0
+      xSignRange: 0
       startMargin: 0.35
       endMargin: 0.35
       _index: 0
       _isOpen: 0
     - bones: 0e0000001000000012000000
       isLeaf: 0
+      xSignRange: 0
       startMargin: 0.35
       endMargin: 0.35
       _index: 0
       _isOpen: 0
-    radius: 0.06
+    startRadius: 0.06
+    endRadius: 0.06
     shape:
       serializedVersion: 2
       m_Curve:
@@ -401,17 +417,20 @@ MonoBehaviour:
     bodyLines:
     - bones: 0f00000011000000
       isLeaf: 0
+      xSignRange: 0
       startMargin: 0
-      endMargin: 0
+      endMargin: 0.15
       _index: 0
       _isOpen: 0
     - bones: 1000000012000000
       isLeaf: 0
+      xSignRange: 0
       startMargin: 0
-      endMargin: 0
+      endMargin: 0.15
       _index: 0
       _isOpen: 0
-    radius: 0.05
+    startRadius: 0.05
+    endRadius: 0.05
     shape:
       serializedVersion: 2
       m_Curve:
@@ -461,17 +480,20 @@ MonoBehaviour:
     bodyLines:
     - bones: 0f0000001100000020000000
       isLeaf: 0
+      xSignRange: 0
       startMargin: 0.35
       endMargin: 0.35
       _index: 0
       _isOpen: 0
     - bones: 10000000120000002f000000
       isLeaf: 0
+      xSignRange: 0
       startMargin: 0.35
       endMargin: 0.35
       _index: 0
       _isOpen: 0
-    radius: 0.06
+    startRadius: 0.06
+    endRadius: 0.06
     shape:
       serializedVersion: 2
       m_Curve:
@@ -521,17 +543,20 @@ MonoBehaviour:
     bodyLines:
     - bones: 1100000020000000
       isLeaf: 1
+      xSignRange: 0
       startMargin: 0
       endMargin: 0
       _index: 0
       _isOpen: 0
     - bones: 120000002f000000
       isLeaf: 1
+      xSignRange: 0
       startMargin: 0
       endMargin: 0
       _index: 0
       _isOpen: 0
-    radius: 0.07
+    startRadius: 0.07
+    endRadius: 0.07
     shape:
       serializedVersion: 2
       m_Curve:
@@ -572,17 +597,20 @@ MonoBehaviour:
     bodyLines:
     - bones: 0100000003000000
       isLeaf: 0
+      xSignRange: 2
       startMargin: 0
       endMargin: 0
       _index: 0
       _isOpen: 0
     - bones: 0200000004000000
       isLeaf: 0
+      xSignRange: 1
       startMargin: 0
       endMargin: 0
       _index: 0
       _isOpen: 0
-    radius: 0.1
+    startRadius: 0.1
+    endRadius: 0.1
     shape:
       serializedVersion: 2
       m_Curve:
@@ -632,17 +660,20 @@ MonoBehaviour:
     bodyLines:
     - bones: 010000000300000005000000
       isLeaf: 0
+      xSignRange: 2
       startMargin: 0.35
       endMargin: 0.35
       _index: 0
       _isOpen: 0
     - bones: 020000000400000006000000
       isLeaf: 0
+      xSignRange: 1
       startMargin: 0.35
       endMargin: 0.35
       _index: 0
       _isOpen: 0
-    radius: 0.09
+    startRadius: 0.09
+    endRadius: 0.09
     shape:
       serializedVersion: 2
       m_Curve:
@@ -692,17 +723,20 @@ MonoBehaviour:
     bodyLines:
     - bones: 0300000005000000
       isLeaf: 0
+      xSignRange: 2
       startMargin: 0
       endMargin: 0
       _index: 0
       _isOpen: 0
     - bones: 0400000006000000
       isLeaf: 0
+      xSignRange: 1
       startMargin: 0
       endMargin: 0
       _index: 0
       _isOpen: 0
-    radius: 0.08
+    startRadius: 0.08
+    endRadius: 0.08
     shape:
       serializedVersion: 2
       m_Curve:
@@ -752,17 +786,20 @@ MonoBehaviour:
     bodyLines:
     - bones: 030000000500000013000000
       isLeaf: 0
+      xSignRange: 2
       startMargin: 0.35
       endMargin: 0.15
       _index: 0
       _isOpen: 0
     - bones: 040000000600000014000000
       isLeaf: 0
+      xSignRange: 1
       startMargin: 0.35
       endMargin: 0.15
       _index: 0
       _isOpen: 0
-    radius: 0.07
+    startRadius: 0.07
+    endRadius: 0.07
     shape:
       serializedVersion: 2
       m_Curve:
@@ -812,17 +849,20 @@ MonoBehaviour:
     bodyLines:
     - bones: 0500000013000000
       isLeaf: 1
+      xSignRange: 2
       startMargin: 0.35
       endMargin: 0
       _index: 0
       _isOpen: 0
     - bones: 0600000014000000
       isLeaf: 1
+      xSignRange: 1
       startMargin: 0.35
       endMargin: 0
       _index: 0
       _isOpen: 0
-    radius: 0.09
+    startRadius: 0.09
+    endRadius: 0.09
     shape:
       serializedVersion: 2
       m_Curve:
