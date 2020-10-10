@@ -162,9 +162,12 @@ namespace Chigiri.DietShaper.Editor
             }
         }
 
-        // 最も近いボーン線分への垂線の足を求める
-        public (Vector3, float) Resolve(Vector3 v)
+        /// 指定された点から最も近いボーン線分への垂線の足を求めます。
+        /// <param name="v">対象とする点のグローバル座標</param>
+        /// <returns>垂線の足のグローバル座標、折れ線上の位置(0…1)、グローバル距離</returns>
+        public (Vector3, float, float) Resolve(Vector3 v)
         {
+            var va = avatarRoot.transform.InverseTransformPoint(v);
             var distance = Mathf.Infinity;
             var result = v;
             var time = 0f;
@@ -173,6 +176,8 @@ namespace Chigiri.DietShaper.Editor
                 var bodyLine = key.bodyLines[i];
                 var (p, t, d) = groups[i].NearestPoint(v);
                 if (distance <= d) continue; // 最も近いbodyLineだけを採用
+                if (bodyLine.xSignRange == SignRange.positive && va.x < 0f) continue;
+                if (bodyLine.xSignRange == SignRange.negative && 0f < va.x) continue;
                 result = p;
                 distance = d;
                 // startMargin, endMargin を考慮してエンベロープ内の位置(time)を調整
@@ -187,7 +192,7 @@ namespace Chigiri.DietShaper.Editor
             var r = key.shape.Evaluate(time);
             if (time < 0f || 1f < time) r = 1f;
             result = Vector3.Lerp(result, v, r);
-            return (result, distance);
+            return (result, time, distance);
         }
 
     }

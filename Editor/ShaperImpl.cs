@@ -41,18 +41,12 @@ namespace Chigiri.DietShaper.Editor
             var vertices = new Vector3[p.sourceMesh.vertexCount];
             var tr = p.targetRenderer.transform;
             var resolver = new NearestPointResolver(p.avatarRoot, key);
-            NearestPointResolver exceptResolver = null;
-            if (exceptKey != null) exceptResolver = new NearestPointResolver(p.avatarRoot, exceptKey);
             for (var j = 0; j < p.sourceMesh.vertexCount; j++)
             {
                 var v = tr.TransformPoint(posed[j]);
-                var (center, distance) = resolver.Resolve(v);
-                if (exceptResolver != null)
-                {
-                    var (dummy, exceptDistance) = exceptResolver.Resolve(v);
-                    if (exceptDistance <= exceptKey.radius) continue;
-                }
-                if (distance <= key.radius) vertices[j] = tr.InverseTransformVector(center - v);
+                var (nearest, time, distance) = resolver.Resolve(v);
+                var radius = Mathf.Lerp(key.startRadius, key.endRadius, time);
+                if (distance <= radius) vertices[j] = tr.InverseTransformVector(nearest - v);
             }
             result.AddBlendShapeFrame(key.name, 100f, vertices, null, null);
             //var index = result.GetBlendShapeIndex(key.name);

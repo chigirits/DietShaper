@@ -18,7 +18,7 @@ namespace Chigiri.DietShaper.Editor
             var isOpen = property.FindPropertyRelative("_isOpen");
             if (!isOpen.boolValue) return height;
             var bodyLines = property.FindPropertyRelative("bodyLines");
-            var h = (height + spacing) * 5;
+            var h = (height + spacing) * 6;
             for (var i = 0; i < bodyLines.arraySize; i++)
             {
                 h += EditorGUI.GetPropertyHeight(bodyLines.GetArrayElementAtIndex(i)) + spacing;
@@ -44,7 +44,9 @@ namespace Chigiri.DietShaper.Editor
                 EditorGUI.indentLevel++;
                 EditorGUI.PropertyField(rect, property.FindPropertyRelative("name"), new GUIContent("Name", ""));
                 rect.y += height + spacing;
-                EditorGUI.Slider(rect, property.FindPropertyRelative("radius"), 0f, 1f, new GUIContent("Radius", ""));
+                EditorGUI.Slider(rect, property.FindPropertyRelative("startRadius"), 0f, 1f, new GUIContent("Start Radius", ""));
+                rect.y += height + spacing;
+                EditorGUI.Slider(rect, property.FindPropertyRelative("endRadius"), 0f, 1f, new GUIContent("End Radius", ""));
                 rect.y += height + spacing;
                 EditorGUI.PropertyField(rect, property.FindPropertyRelative("shape"), new GUIContent("Shape", ""));
                 rect.y += height + spacing;
