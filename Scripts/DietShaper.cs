@@ -14,22 +14,7 @@ namespace Chigiri.DietShaper
         public SkinnedMeshRenderer targetRenderer;
         public Mesh sourceMesh;
         public bool alwaysShowGizmo;
-        public List<ShapeKey> shapeKeys = new List<ShapeKey> {
-            ShapeKey.presets["Hips"],
-            ShapeKey.presets["Spine"],
-            ShapeKey.presets["Chest"],
-            ShapeKey.presets["Shoulders"],
-            ShapeKey.presets["UpperArms"],
-            ShapeKey.presets["Elbows"],
-            ShapeKey.presets["LowerArms"],
-            ShapeKey.presets["Wrists"],
-            ShapeKey.presets["Hands"],
-            ShapeKey.presets["UpperLegs"],
-            ShapeKey.presets["Knees"],
-            ShapeKey.presets["LowerLegs"],
-            ShapeKey.presets["Ankles"],
-            ShapeKey.presets["Feet"],
-        };
+        public List<ShapeKey> shapeKeys = new List<ShapeKey> {};
 
 #if UNITY_EDITOR
 
