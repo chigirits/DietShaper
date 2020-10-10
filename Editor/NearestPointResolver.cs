@@ -145,7 +145,7 @@ namespace Chigiri.DietShaper.Editor
                         groups[i] = new BoneGroup2(
                             avatarRoot.GetBoneTransform(b.bones[0]).position,
                             avatarRoot.GetBoneTransform(b.bones[1]).position,
-                            !b.isLeaf
+                            !key.isLeaf
                         );
                         break;
                     case 3:
@@ -190,7 +190,7 @@ namespace Chigiri.DietShaper.Editor
                     time = (t - m0) / mr;
             }
             var r = key.shape.Evaluate(time);
-            if (time < 0f || 1f < time) r = 1f;
+            if (time < 0f || 1f < time && !key.isLeaf) r = 1f;
             result = Vector3.Lerp(result, v, r);
             return (result, time, distance);
         }

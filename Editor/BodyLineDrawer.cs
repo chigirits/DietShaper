@@ -18,7 +18,7 @@ namespace Chigiri.DietShaper.Editor
             var isOpen = property.FindPropertyRelative("_isOpen");
             if (!isOpen.boolValue) return height;
             var bones = property.FindPropertyRelative("bones");
-            return (height + spacing) * (5 + bones.arraySize) - spacing;
+            return (height + spacing) * (4 + bones.arraySize) - spacing;
         }
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -40,8 +40,6 @@ namespace Chigiri.DietShaper.Editor
                     EditorGUI.PropertyField(rect, bone, new GUIContent($"Bones [{i}]", ""));
                     rect.y += height + spacing;
                 }
-                EditorGUI.PropertyField(rect, property.FindPropertyRelative("isLeaf"), new GUIContent("Is Leaf", ""));
-                rect.y += height + spacing;
                 EditorGUI.PropertyField(rect, property.FindPropertyRelative("xSignRange"), new GUIContent("X Sign Range", ""));
                 rect.y += height + spacing;
                 EditorGUI.Slider(rect, property.FindPropertyRelative("startMargin"), 0f, 0.499f, new GUIContent("Start Margin", ""));

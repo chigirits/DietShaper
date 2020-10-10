@@ -20,7 +20,6 @@ namespace Chigiri.DietShaper
     {
 
         public List<HumanBodyBones> bones;
-        public bool isLeaf;
         public SignRange xSignRange;
         public float startMargin;
         public float endMargin;
@@ -34,12 +33,6 @@ namespace Chigiri.DietShaper
             this.endMargin = endMargin;
             this.xSignRange = xSignRange;
             this.bones = new List<HumanBodyBones>(bones);
-            var last = this.bones.Count - 1;
-            if (this.bones[last] == HumanBodyBones.LastBone)
-            {
-                this.bones.RemoveAt(last);
-                isLeaf = true;
-            }
         }
 
 #if UNITY_EDITOR
@@ -106,7 +99,7 @@ namespace Chigiri.DietShaper
             }
         }
 
-        public void DrawGizmos(Animator avatarRoot, float startRadius, float endRadius, Color color)
+        public void DrawGizmos(Animator avatarRoot, float startRadius, float endRadius, bool isLeaf, Color color)
         {
             Handles.color = color;
             Gizmos.color = color;
