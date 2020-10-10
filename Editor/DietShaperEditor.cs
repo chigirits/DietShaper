@@ -141,7 +141,7 @@ namespace Chigiri.DietShaper.Editor
                 shapeKeys.InsertArrayElementAtIndex(n);
             };
             // reorderableList.onAddDropdownCallback = (rect, list) => Debug.Log("onAddDropdown");
-            // reorderableList.onCanAddCallback = list => true;
+            reorderableList.onCanAddCallback = list => 0 < shapeKeys.arraySize;
             // reorderableList.onCanRemoveCallback = list => true;
             // reorderableList.onChangedCallback = list => Debug.Log("onChanged");
             // reorderableList.onMouseUpCallback = list => { };
@@ -173,18 +173,28 @@ namespace Chigiri.DietShaper.Editor
                 EditorGUILayout.PropertyField(targetRenderer, new GUIContent("Target", "操作対象のSkinnedMeshRenderer"));
                 EditorGUILayout.PropertyField(sourceMesh, new GUIContent("Source Mesh", "オリジナルのメッシュ"));
                 EditorGUILayout.PropertyField(alwaysShowGizmo, new GUIContent("Always Show Gizmo", "非選択状態でもギズモを表示"));
-
                 reorderableList.DoLayoutList();
+
+                var presetIndex = EditorGUILayout.Popup("Add Shape Key From Preset", -1, ShapeKey.presetKeys);
+                if (0 <= presetIndex)
+                {
+                    var n = shapeKeys.arraySize;
+                    shapeKeys.arraySize++;
+                    var presetKey = ShapeKey.presetKeys[presetIndex];
+                    ShapeKeyDrawer.CopyProperties(shapeKeys.GetArrayElementAtIndex(n), ShapeKey.presets[presetKey]);
+                    reorderableList.index = n;
+                }
+
                 if (0 <= reorderableList.index)
                 {
+                    EditorGUILayout.Space();
                     EditorGUILayout.BeginVertical(GUI.skin.box);
                     EditorGUILayout.PropertyField(shapeKeys.GetArrayElementAtIndex(reorderableList.index));
                     EditorGUILayout.EndVertical();
                 }
 
-                EditorGUILayout.Space();
-
                 // エラー表示
+                EditorGUILayout.Space();
                 var error = Validate();
                 if (error != "")
                 {

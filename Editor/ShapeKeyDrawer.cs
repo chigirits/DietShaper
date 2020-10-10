@@ -17,7 +17,7 @@ namespace Chigiri.DietShaper.Editor
         {
             var bodyLines = property.FindPropertyRelative("bodyLines");
             var isLoaded = 0 < bodyLines.arraySize;
-            var h = (height + spacing) * (isLoaded ? 8 : 2);
+            var h = (height + spacing) * (isLoaded ? 8 : 1);
             for (var i = 0; i < bodyLines.arraySize; i++)
             {
                 h += EditorGUI.GetPropertyHeight(bodyLines.GetArrayElementAtIndex(i)) + spacing;
@@ -59,17 +59,6 @@ namespace Chigiri.DietShaper.Editor
             else
                 EditorGUI.LabelField(rect, new GUIContent(name, ""));
             rect.y += height + spacing;
-
-            EditorGUI.indentLevel++;
-            var presetIndex = EditorGUI.Popup(rect, "Load Preset", -1, ShapeKey.presetKeys);
-            rect.y += height + spacing;
-            EditorGUI.indentLevel--;
-
-            if (0 <= presetIndex)
-            {
-                var presetKey = ShapeKey.presetKeys[presetIndex];
-                CopyProperties(property, ShapeKey.presets[presetKey]);
-            }
 
             if (!isLoaded) return;
 
