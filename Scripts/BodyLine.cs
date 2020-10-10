@@ -25,7 +25,6 @@ namespace Chigiri.DietShaper
         public float endMargin;
 
         public int _index;
-        public bool _isOpen;
 
         public BodyLine(float startMargin, float endMargin, SignRange xSignRange, params HumanBodyBones[] bones)
         {

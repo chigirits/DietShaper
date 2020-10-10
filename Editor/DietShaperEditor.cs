@@ -11,7 +11,7 @@ namespace Chigiri.DietShaper.Editor
     {
 
         ReorderableList reorderableList;
-        List<string> blendShapes;
+        List<string> presets;
 
         [MenuItem("Chigiri/Create DietShaper")]
         public static void CreateDietShaper()
@@ -68,6 +68,92 @@ namespace Chigiri.DietShaper.Editor
             }
         }
 
+        static float lineHeight
+        {
+            get
+            {
+                return EditorGUIUtility.singleLineHeight;
+            }
+        }
+
+        static float linePitch
+        {
+            get
+            {
+                return lineHeight + 2f;
+            }
+        }
+
+        // リスト要素の高さ
+        float ElementHeightCallback(int i)
+        {
+            return linePitch;
+        }
+
+        // リスト要素を描画
+        void DrawElementCallback(Rect rect, int i, bool isActive, bool isFocused)
+        {
+            var orgLabelWidth = EditorGUIUtility.labelWidth;
+
+            var shapeKey = shapeKeys.GetArrayElementAtIndex(i);
+            var r = new Rect(rect.x, rect.y, rect.width, lineHeight);
+
+            // 各フィールドを描画
+            EditorGUIUtility.labelWidth = r.width - r.height * 1.5f;
+            var enable = shapeKey.FindPropertyRelative("enable");
+            var name = shapeKey.FindPropertyRelative("name").stringValue;
+            if (name == "") name = "(empty)";
+            var isLoaded = 0 < shapeKey.FindPropertyRelative("bodyLines").arraySize;
+            if (isLoaded)
+                EditorGUI.PropertyField(r, enable, new GUIContent(name, ""));
+            else
+                EditorGUI.LabelField(r, new GUIContent(name, ""));
+            r.y += linePitch;
+
+            EditorGUIUtility.labelWidth = orgLabelWidth;
+        }
+
+        // リスト描画の準備
+        void PrepareReordableList()
+        {
+            if (reorderableList != null) return;
+
+            reorderableList = new ReorderableList(
+                elements: self.shapeKeys,
+                elementType: typeof(ShapeKey),
+                draggable: true,
+                displayHeader: true,
+                displayAddButton: true,
+                displayRemoveButton: true
+            );
+
+            // reorderableList.drawElementBackgroundCallback = (Rect rect, int i, bool isActive, bool isFocused) => { };
+
+            reorderableList.drawElementCallback = DrawElementCallback;
+
+            // reorderableList.drawFooterCallback = rect => { };
+            reorderableList.drawHeaderCallback = rect => EditorGUI.LabelField(rect, "Shape Keys");
+            reorderableList.elementHeightCallback = ElementHeightCallback;
+            reorderableList.onAddCallback = list =>
+            {
+                // Shape Key を追加
+                var n = shapeKeys.arraySize;
+                shapeKeys.InsertArrayElementAtIndex(n);
+            };
+            // reorderableList.onAddDropdownCallback = (rect, list) => Debug.Log("onAddDropdown");
+            // reorderableList.onCanAddCallback = list => true;
+            // reorderableList.onCanRemoveCallback = list => true;
+            // reorderableList.onChangedCallback = list => Debug.Log("onChanged");
+            // reorderableList.onMouseUpCallback = list => { };
+            reorderableList.onRemoveCallback = list =>
+            {
+                shapeKeys.DeleteArrayElementAtIndex(list.index);
+                if (shapeKeys.arraySize <= list.index) list.index--;
+            };
+            reorderableList.onReorderCallback = list => Debug.Log("onReorder");
+            reorderableList.onSelectCallback = list => Debug.Log("onSelect");
+        }
+
         public override void OnInspectorGUI()
         {
             // 操作前の値を一部保持（比較用）
@@ -78,6 +164,9 @@ namespace Chigiri.DietShaper.Editor
             serializedObject.Update();
             EditorGUI.BeginChangeCheck();
             {
+                // リスト描画の準備
+                PrepareReordableList();
+
                 // UI描画
 
                 EditorGUILayout.PropertyField(avatarRoot, new GUIContent("Avatar Root", "操作対象のアバターのルートオブジェクト"));
@@ -85,10 +174,15 @@ namespace Chigiri.DietShaper.Editor
                 EditorGUILayout.PropertyField(sourceMesh, new GUIContent("Source Mesh", "オリジナルのメッシュ"));
                 EditorGUILayout.PropertyField(alwaysShowGizmo, new GUIContent("Always Show Gizmo", "非選択状態でもギズモを表示"));
 
-                for (var i = 0; i < shapeKeys.arraySize; i++)
+                reorderableList.DoLayoutList();
+                if (0 <= reorderableList.index)
                 {
-                    EditorGUILayout.PropertyField(shapeKeys.GetArrayElementAtIndex(i));
+                    EditorGUILayout.BeginVertical(GUI.skin.box);
+                    EditorGUILayout.PropertyField(shapeKeys.GetArrayElementAtIndex(reorderableList.index));
+                    EditorGUILayout.EndVertical();
                 }
+
+                EditorGUILayout.Space();
 
                 // エラー表示
                 var error = Validate();
@@ -152,6 +246,10 @@ namespace Chigiri.DietShaper.Editor
             if (sourceMesh.objectReferenceValue == null || self.sourceMesh == null)
             {
                 return "Source Mesh を指定してください";
+            }
+            if (shapeKeys.arraySize == 0)
+            {
+                return "Shape Keys を1つ以上作成してください";
             }
 
             var names = new Dictionary<string, bool>();

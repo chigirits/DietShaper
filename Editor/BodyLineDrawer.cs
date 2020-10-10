@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -13,10 +14,23 @@ namespace Chigiri.DietShaper.Editor
         static float height = EditorGUIUtility.singleLineHeight;
         static float spacing = EditorGUIUtility.standardVerticalSpacing;
 
+        public static void CopyProperties(SerializedProperty property, BodyLine value)
+        {
+            var bones = property.FindPropertyRelative("bones");
+            bones.arraySize = value.bones.Count;
+            for (var i=0; i<bones.arraySize; i++)
+            {
+                var boneIndex = Array.IndexOf(Enum.GetValues(typeof(HumanBodyBones)), value.bones[i]);
+                bones.GetArrayElementAtIndex(i).enumValueIndex = boneIndex;
+            }
+            var xSignRangeIndex = Array.IndexOf(Enum.GetValues(typeof(SignRange)), value.xSignRange);
+            property.FindPropertyRelative("xSignRange").enumValueIndex = xSignRangeIndex;
+            property.FindPropertyRelative("startMargin").floatValue = value.startMargin;
+            property.FindPropertyRelative("endMargin").floatValue = value.endMargin;
+        }
+
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            var isOpen = property.FindPropertyRelative("_isOpen");
-            if (!isOpen.boolValue) return height;
             var bones = property.FindPropertyRelative("bones");
             return (height + spacing) * (4 + bones.arraySize) - spacing;
         }
@@ -26,11 +40,9 @@ namespace Chigiri.DietShaper.Editor
             var rect = new Rect(position.x, position.y, position.width, height);
 
             var index = property.FindPropertyRelative("_index");
-            var isOpen = property.FindPropertyRelative("_isOpen");
-            isOpen.boolValue = EditorGUI.Foldout(rect, isOpen.boolValue, $"Body Lines [{index.intValue}]");
+            EditorGUI.LabelField(rect, $"Body Lines [{index.intValue}]");
             rect.y += height + spacing;
 
-            if (isOpen.boolValue)
             {
                 EditorGUI.indentLevel++;
                 var bones = property.FindPropertyRelative("bones");
