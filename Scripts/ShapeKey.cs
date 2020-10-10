@@ -24,6 +24,8 @@ namespace Chigiri.DietShaper
         public Color gizmoColor = Color.green;
 
         public static string[] presetKeys = new string[] {
+            "All",
+            "---------",
             "Hips",
             "Spine",
             "Chest",

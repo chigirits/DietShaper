@@ -154,6 +154,15 @@ namespace Chigiri.DietShaper.Editor
             reorderableList.onSelectCallback = list => Debug.Log("onSelect");
         }
 
+        void AddFromPreset(string presetKey)
+        {
+            if (!ShapeKey.presets.ContainsKey(presetKey)) return;
+            var n = shapeKeys.arraySize;
+            shapeKeys.arraySize++;
+            ShapeKeyDrawer.CopyProperties(shapeKeys.GetArrayElementAtIndex(n), ShapeKey.presets[presetKey]);
+            reorderableList.index = n;
+        }
+
         public override void OnInspectorGUI()
         {
             // 操作前の値を一部保持（比較用）
@@ -178,11 +187,15 @@ namespace Chigiri.DietShaper.Editor
                 var presetIndex = EditorGUILayout.Popup("Add Shape Key From Preset", -1, ShapeKey.presetKeys);
                 if (0 <= presetIndex)
                 {
-                    var n = shapeKeys.arraySize;
-                    shapeKeys.arraySize++;
                     var presetKey = ShapeKey.presetKeys[presetIndex];
-                    ShapeKeyDrawer.CopyProperties(shapeKeys.GetArrayElementAtIndex(n), ShapeKey.presets[presetKey]);
-                    reorderableList.index = n;
+                    if (presetKey == "All")
+                    {
+                        foreach (var k in ShapeKey.presetKeys) AddFromPreset(k);
+                    }
+                    else
+                    {
+                        AddFromPreset(presetKey);
+                    }
                 }
 
                 if (0 <= reorderableList.index)
