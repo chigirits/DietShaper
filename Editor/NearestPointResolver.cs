@@ -20,24 +20,25 @@ namespace Chigiri.DietShaper.Editor
             Vector3 v;
             Vector3 vIdent;
             float vLength;
-            bool limitEnd;
+            bool isLeaf;
 
-            public BoneGroup2(Vector3 start, Vector3 end, bool limitEnd)
+            public BoneGroup2(Vector3 start, Vector3 end, bool isLeaf)
             {
                 this.start = start;
                 v = end - start;
                 vIdent = v.normalized;
                 vLength = v.magnitude;
-                this.limitEnd = limitEnd;
+                this.isLeaf = isLeaf;
             }
 
             public (Vector3, float, float) NearestPoint(Vector3 vertex)
             {
                 // 頂点からボーン線分に下ろした垂線の足を求める
                 var t = Vector3.Dot(vIdent, vertex - start) / vLength;
-                if (t < 0f || 1f < t && limitEnd) return (vertex, 0f, Mathf.Infinity); // 垂線の足がボーン線分上になければ変形しない
+                if (t < 0f || 1f < t && !isLeaf) return (vertex, 0f, Mathf.Infinity); // 垂線の足がボーン線分上になければ変形しない
                 var nearest = start + v * t;
                 var distance = (vertex - nearest).magnitude;
+                if (isLeaf) nearest = start;
                 return (nearest, t, distance);
             }
 
@@ -145,7 +146,7 @@ namespace Chigiri.DietShaper.Editor
                         groups[i] = new BoneGroup2(
                             avatarRoot.GetBoneTransform(b.bones[0]).position,
                             avatarRoot.GetBoneTransform(b.bones[1]).position,
-                            !key.isLeaf
+                            key.isLeaf
                         );
                         break;
                     case 3:
