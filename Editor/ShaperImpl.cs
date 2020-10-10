@@ -45,7 +45,7 @@ namespace Chigiri.DietShaper.Editor
             {
                 var v = tr.TransformPoint(posed[j]);
                 var (nearest, time, distance) = resolver.Resolve(v);
-                var radius = Mathf.Lerp(key.startRadius, key.endRadius, time);
+                var radius = key.radius; // Mathf.Lerp(key.startRadius, key.endRadius, time);
                 if (radius < distance) continue;
                 var w = tr.InverseTransformVector(nearest - v); // 結果の座標差分
 
