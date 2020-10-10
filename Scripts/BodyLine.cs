@@ -8,22 +8,31 @@ using UnityEditor;
 namespace Chigiri.DietShaper
 {
 
+    public enum SignRange
+    {
+        both = 0,
+        positive = 1,
+        negative = 2
+    }
+
     [System.Serializable]
     public class BodyLine
     {
 
         public List<HumanBodyBones> bones;
         public bool isLeaf;
+        public SignRange xSignRange;
         public float startMargin;
         public float endMargin;
 
         public int _index;
         public bool _isOpen;
 
-        public BodyLine(float startMargin, float endMargin, params HumanBodyBones[] bones)
+        public BodyLine(float startMargin, float endMargin, SignRange xSignRange, params HumanBodyBones[] bones)
         {
             this.startMargin = startMargin;
             this.endMargin = endMargin;
+            this.xSignRange = xSignRange;
             this.bones = new List<HumanBodyBones>(bones);
             var last = this.bones.Count - 1;
             if (this.bones[last] == HumanBodyBones.LastBone)
