@@ -14,6 +14,7 @@ namespace Chigiri.DietShaper
         public List<BodyLine> bodyLines = new List<BodyLine>();
         public float startRadius = 0.1f;
         public float endRadius = 0.1f;
+        public float addNormal;
         public bool isLeaf;
         public AnimationCurve shape = new AnimationCurve(
             new Keyframe(0f, 1f),
