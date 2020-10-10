@@ -14,6 +14,7 @@ namespace Chigiri.DietShaper
         public List<BodyLine> bodyLines = new List<BodyLine>();
         public float startRadius = 0.1f;
         public float endRadius = 0.1f;
+        public bool isLeaf;
         public AnimationCurve shape = new AnimationCurve(
             new Keyframe(0f, 1f),
             new Keyframe(0.2f, 0f),
@@ -31,7 +32,7 @@ namespace Chigiri.DietShaper
             if (!enable) return;
             foreach (var bodyLine in bodyLines)
             {
-                bodyLine.DrawGizmos(avatarRoot, startRadius, endRadius, gizmoColor);
+                bodyLine.DrawGizmos(avatarRoot, startRadius, endRadius, isLeaf, gizmoColor);
             }
         }
 

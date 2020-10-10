@@ -107,10 +107,11 @@ namespace Chigiri.DietShaper
                 name = "Diet.Hands",
                 startRadius = 0.07f,
                 endRadius = 0.07f,
+                isLeaf = true,
                 gizmoColor = Color.cyan,
                 bodyLines = new List<BodyLine>{
-                    new BodyLine(0f, 0f, SignRange.both, HumanBodyBones.LeftHand, HumanBodyBones.LeftMiddleDistal, HumanBodyBones.LastBone),
-                    new BodyLine(0f, 0f, SignRange.both, HumanBodyBones.RightHand, HumanBodyBones.RightMiddleDistal, HumanBodyBones.LastBone)
+                    new BodyLine(0f, 0f, SignRange.both, HumanBodyBones.LeftHand, HumanBodyBones.LeftMiddleDistal),
+                    new BodyLine(0f, 0f, SignRange.both, HumanBodyBones.RightHand, HumanBodyBones.RightMiddleDistal)
                 },
                 shape = new AnimationCurve(
                     new Keyframe(0f, 1f),
@@ -167,10 +168,11 @@ namespace Chigiri.DietShaper
                 name = "Diet.Feet",
                 startRadius = 0.09f,
                 endRadius = 0.09f,
+                isLeaf = true,
                 gizmoColor = Color.green,
                 bodyLines = new List<BodyLine>{
-                    new BodyLine(0.35f, 0f, SignRange.negative, HumanBodyBones.LeftFoot, HumanBodyBones.LeftToes, HumanBodyBones.LastBone),
-                    new BodyLine(0.35f, 0f, SignRange.positive, HumanBodyBones.RightFoot, HumanBodyBones.RightToes, HumanBodyBones.LastBone)
+                    new BodyLine(0.35f, 0f, SignRange.negative, HumanBodyBones.LeftFoot, HumanBodyBones.LeftToes),
+                    new BodyLine(0.35f, 0f, SignRange.positive, HumanBodyBones.RightFoot, HumanBodyBones.RightToes)
                 },
                 shape = new AnimationCurve(
                     new Keyframe(0f, 1f),
