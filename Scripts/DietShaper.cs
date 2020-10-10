@@ -52,7 +52,7 @@ namespace Chigiri.DietShaper
                 name = "Diet.Shoulders",
                 startRadius = 0.08f,
                 endRadius = 0.08f,
-                addNormal = 0.05,
+                addNormal = 0.05f,
                 gizmoColor = Color.yellow,
                 bodyLines = new List<BodyLine>{
                     new BodyLine(0.35f, 0.35f, SignRange.both, HumanBodyBones.Neck, HumanBodyBones.LeftUpperArm, HumanBodyBones.LeftLowerArm),
