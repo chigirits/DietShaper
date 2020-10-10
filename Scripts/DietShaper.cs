@@ -19,8 +19,7 @@ namespace Chigiri.DietShaper
 
             new ShapeKey {
                 name = "Diet.Hips",
-                startRadius = 0.15f,
-                endRadius = 0.15f,
+                radius = 0.15f,
                 gizmoColor = Color.blue,
                 bodyLines = new List<BodyLine>{
                     new BodyLine(0f, 0.35f, SignRange.both, HumanBodyBones.Hips, HumanBodyBones.LeftUpperLeg, HumanBodyBones.LeftLowerLeg),
@@ -30,8 +29,7 @@ namespace Chigiri.DietShaper
 
             new ShapeKey {
                 name = "Diet.Spine",
-                startRadius = 0.14f,
-                endRadius = 0.14f,
+                radius = 0.14f,
                 gizmoColor = Color.cyan,
                 bodyLines = new List<BodyLine>{
                     new BodyLine(0f, 0f, SignRange.both, HumanBodyBones.Hips, HumanBodyBones.Spine, HumanBodyBones.Chest)
@@ -40,8 +38,7 @@ namespace Chigiri.DietShaper
 
             new ShapeKey {
                 name = "Diet.Chest",
-                startRadius = 0.13f,
-                endRadius = 0.13f,
+                radius = 0.13f,
                 gizmoColor = Color.green,
                 bodyLines = new List<BodyLine>{
                     new BodyLine(0.35f, 0f, SignRange.both, HumanBodyBones.Spine, HumanBodyBones.Chest, HumanBodyBones.Neck)
@@ -50,8 +47,8 @@ namespace Chigiri.DietShaper
 
             new ShapeKey {
                 name = "Diet.Shoulders",
-                startRadius = 0.08f,
-                endRadius = 0.08f,
+                radius = 0.08f,
+                addNormal = 0.05f,
                 gizmoColor = Color.yellow,
                 bodyLines = new List<BodyLine>{
                     new BodyLine(0.35f, 0.35f, SignRange.both, HumanBodyBones.Neck, HumanBodyBones.LeftUpperArm, HumanBodyBones.LeftLowerArm),
@@ -61,8 +58,7 @@ namespace Chigiri.DietShaper
 
             new ShapeKey {
                 name = "Diet.UpperArms",
-                startRadius = 0.07f,
-                endRadius = 0.07f,
+                radius = 0.07f,
                 gizmoColor = Color.Lerp(Color.red, Color.yellow, 0.5f),
                 bodyLines = new List<BodyLine>{
                     new BodyLine(0f, 0f, SignRange.both, HumanBodyBones.LeftUpperArm, HumanBodyBones.LeftLowerArm),
@@ -72,8 +68,7 @@ namespace Chigiri.DietShaper
 
             new ShapeKey {
                 name = "Diet.Elbows",
-                startRadius = 0.06f,
-                endRadius = 0.06f,
+                radius = 0.06f,
                 gizmoColor = Color.red,
                 bodyLines = new List<BodyLine>{
                     new BodyLine(0.35f, 0.35f, SignRange.both, HumanBodyBones.LeftUpperArm, HumanBodyBones.LeftLowerArm, HumanBodyBones.LeftHand),
@@ -83,8 +78,7 @@ namespace Chigiri.DietShaper
 
             new ShapeKey {
                 name = "Diet.LowerArms",
-                startRadius = 0.05f,
-                endRadius = 0.05f,
+                radius = 0.05f,
                 gizmoColor = Color.magenta,
                 bodyLines = new List<BodyLine>{
                     new BodyLine(0f, 0.15f, SignRange.both, HumanBodyBones.LeftLowerArm, HumanBodyBones.LeftHand),
@@ -94,8 +88,7 @@ namespace Chigiri.DietShaper
 
             new ShapeKey {
                 name = "Diet.Wrists",
-                startRadius = 0.06f,
-                endRadius = 0.06f,
+                radius = 0.06f,
                 gizmoColor = Color.blue,
                 bodyLines = new List<BodyLine>{
                     new BodyLine(0.35f, 0.35f, SignRange.both, HumanBodyBones.LeftLowerArm, HumanBodyBones.LeftHand, HumanBodyBones.LeftMiddleDistal),
@@ -105,8 +98,7 @@ namespace Chigiri.DietShaper
 
             new ShapeKey {
                 name = "Diet.Hands",
-                startRadius = 0.07f,
-                endRadius = 0.07f,
+                radius = 0.07f,
                 isLeaf = true,
                 gizmoColor = Color.cyan,
                 bodyLines = new List<BodyLine>{
@@ -122,8 +114,7 @@ namespace Chigiri.DietShaper
 
             new ShapeKey {
                 name = "Diet.UpperLegs",
-                startRadius = 0.1f,
-                endRadius = 0.1f,
+                radius = 0.1f,
                 gizmoColor = Color.magenta,
                 bodyLines = new List<BodyLine>{
                     new BodyLine(0f, 0f, SignRange.negative, HumanBodyBones.LeftUpperLeg, HumanBodyBones.LeftLowerLeg),
@@ -133,8 +124,7 @@ namespace Chigiri.DietShaper
 
             new ShapeKey {
                 name = "Diet.Knees",
-                startRadius = 0.09f,
-                endRadius = 0.09f,
+                radius = 0.09f,
                 gizmoColor = Color.red,
                 bodyLines = new List<BodyLine>{
                     new BodyLine(0.35f, 0.35f, SignRange.negative, HumanBodyBones.LeftUpperLeg, HumanBodyBones.LeftLowerLeg, HumanBodyBones.LeftFoot),
@@ -144,8 +134,7 @@ namespace Chigiri.DietShaper
 
             new ShapeKey {
                 name = "Diet.LowerLegs",
-                startRadius = 0.08f,
-                endRadius = 0.08f,
+                radius = 0.08f,
                 gizmoColor = Color.Lerp(Color.red, Color.yellow, 0.5f),
                 bodyLines = new List<BodyLine>{
                     new BodyLine(0f, 0f, SignRange.negative, HumanBodyBones.LeftLowerLeg, HumanBodyBones.LeftFoot),
@@ -155,8 +144,7 @@ namespace Chigiri.DietShaper
 
             new ShapeKey {
                 name = "Diet.Ankles",
-                startRadius = 0.07f,
-                endRadius = 0.07f,
+                radius = 0.07f,
                 gizmoColor = Color.yellow,
                 bodyLines = new List<BodyLine>{
                     new BodyLine(0.35f, 0.15f, SignRange.negative, HumanBodyBones.LeftLowerLeg, HumanBodyBones.LeftFoot, HumanBodyBones.LeftToes),
@@ -166,8 +154,7 @@ namespace Chigiri.DietShaper
 
             new ShapeKey {
                 name = "Diet.Feet",
-                startRadius = 0.09f,
-                endRadius = 0.09f,
+                radius = 0.09f,
                 isLeaf = true,
                 gizmoColor = Color.green,
                 bodyLines = new List<BodyLine>{

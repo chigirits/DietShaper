@@ -143,19 +143,28 @@ namespace Chigiri.DietShaper.Editor
                 switch (b.bones.Count)
                 {
                     case 2:
+                    {
+                        var b0 = avatarRoot.GetBoneTransform(b.bones[0]).position;
+                        var b1 = avatarRoot.GetBoneTransform(b.bones[1]).position;
                         groups[i] = new BoneGroup2(
-                            avatarRoot.GetBoneTransform(b.bones[0]).position,
-                            avatarRoot.GetBoneTransform(b.bones[1]).position,
+                            Vector3.Lerp(b0, b1, b.startMargin),
+                            Vector3.Lerp(b0, b1, 1f - b.endMargin),
                             key.isLeaf
                         );
                         break;
+                    }
                     case 3:
+                    {
+                        var b0 = avatarRoot.GetBoneTransform(b.bones[0]).position;
+                        var b1 = avatarRoot.GetBoneTransform(b.bones[1]).position;
+                        var b2 = avatarRoot.GetBoneTransform(b.bones[2]).position;
                         groups[i] = new BoneGroup3(
-                            avatarRoot.GetBoneTransform(b.bones[0]).position,
-                            avatarRoot.GetBoneTransform(b.bones[1]).position,
-                            avatarRoot.GetBoneTransform(b.bones[2]).position
+                            Vector3.Lerp(b0, b1, b.startMargin),
+                            b1,
+                            Vector3.Lerp(b1, b2, 1f - b.endMargin)
                         );
                         break;
+                    }
                     default:
                         Debug.Log("Body line must have 2 or 3 bones");
                         break;
@@ -180,15 +189,8 @@ namespace Chigiri.DietShaper.Editor
                 if (bodyLine.xSignRange == SignRange.positive && va.x < 0f) continue;
                 if (bodyLine.xSignRange == SignRange.negative && 0f < va.x) continue;
                 result = p;
+                time = t;
                 distance = d;
-                // startMargin, endMargin を考慮してエンベロープ内の位置(time)を調整
-                var m0 = bodyLine.startMargin;
-                var m1 = bodyLine.endMargin;
-                var mr = 1f - m0 - m1;
-                if (mr < 1e-5)
-                    time = 0.5f;
-                else
-                    time = (t - m0) / mr;
             }
             var r = key.shape.Evaluate(time);
             if (time < 0f || 1f < time && !key.isLeaf) r = 1f;
