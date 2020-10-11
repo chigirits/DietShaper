@@ -178,7 +178,7 @@ namespace Chigiri.DietShaper.Editor
 
                 // UI描画
 
-                EditorGUILayout.PropertyField(avatarRoot, new GUIContent("Avatar Root", "処理対象のアバターのルートオブジェクト。"));
+                EditorGUILayout.PropertyField(avatarRoot, new GUIContent("Avatar Root", "処理対象の Humanoid アバターのルートオブジェクト。"));
                 EditorGUILayout.PropertyField(targetRenderer, new GUIContent("Target", "処理対象の SkinnedMeshRenderer。Avatar Root に含まれるボーンに関連付けられたオブジェクトを指定する必要があります。"));
                 EditorGUILayout.PropertyField(sourceMesh, new GUIContent("Source Mesh", "オリジナルのメッシュ。Target を変更すると、Target にアタッチされているメッシュがこのフィールドに自動的に指定されます。"));
                 EditorGUILayout.PropertyField(alwaysShowGizmo, new GUIContent("Always Show Gizmo", "チェックすると、この DietShaper がヒエラルキーで非選択状態の間もギズモを表示し続けます。"));
