@@ -16,7 +16,7 @@ namespace Chigiri.DietShaper.Editor
         [MenuItem("Chigiri/Create DietShaper")]
         public static void CreateDietShaper()
         {
-            var path = AssetDatabase.GUIDToAssetPath("12c469a9f19e32744a18d7e7eefef715");
+            var path = AssetDatabase.GUIDToAssetPath("c5fad62c586163349acefab2495a2561");
             var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
             var instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
             instance.transform.SetAsLastSibling();
@@ -178,7 +178,7 @@ namespace Chigiri.DietShaper.Editor
 
                 // UI描画
 
-                EditorGUILayout.PropertyField(avatarRoot, new GUIContent("Avatar Root", "処理対象のアバターのルートオブジェクト。"));
+                EditorGUILayout.PropertyField(avatarRoot, new GUIContent("Avatar Root", "処理対象の Humanoid アバターのルートオブジェクト。"));
                 EditorGUILayout.PropertyField(targetRenderer, new GUIContent("Target", "処理対象の SkinnedMeshRenderer。Avatar Root に含まれるボーンに関連付けられたオブジェクトを指定する必要があります。"));
                 EditorGUILayout.PropertyField(sourceMesh, new GUIContent("Source Mesh", "オリジナルのメッシュ。Target を変更すると、Target にアタッチされているメッシュがこのフィールドに自動的に指定されます。"));
                 EditorGUILayout.PropertyField(alwaysShowGizmo, new GUIContent("Always Show Gizmo", "チェックすると、この DietShaper がヒエラルキーで非選択状態の間もギズモを表示し続けます。"));

@@ -38,7 +38,7 @@ namespace Chigiri.DietShaper.Editor
             var rect = new Rect(position.x, position.y, position.width, height);
 
             var index = property.FindPropertyRelative("_index");
-            EditorGUI.LabelField(rect, $"Body Lines [{index.intValue}]");
+            EditorGUI.LabelField(rect, new GUIContent($"Body Lines [{index.intValue}]", $"{index.intValue}番目の処理対象ボディライン。左右の腕など、複数のボーンを別々に処理した結果を1つのシェイプキーにするときは2つ以上のボディラインを持ちます。ボディラインの数は変更できません。通常はプリセットの設定を変更しないでください。"));
             rect.y += height + spacing;
 
             {
@@ -47,7 +47,7 @@ namespace Chigiri.DietShaper.Editor
                 for (var i=0; i<bones.arraySize; i++)
                 {
                     var bone = bones.GetArrayElementAtIndex(i);
-                    EditorGUI.PropertyField(rect, bone, new GUIContent($"Bones [{i}]", $"{i}番目のボーン。これらのボーンをつないだ線分または折れ線に向かって周囲の頂点が吸着するように変形されます。通常はプリセットの設定を変更しないでください。"));
+                    EditorGUI.PropertyField(rect, bone, new GUIContent($"Bones [{i}]", $"{i}番目のボーン。これらのボーンをつないだ線分または折れ線（ボディライン）に向かって周囲の頂点が吸着するように変形されます。ボーンの数は変更できません。通常はプリセットの設定を変更しないでください。"));
                     rect.y += height + spacing;
                 }
                 EditorGUI.PropertyField(rect, property.FindPropertyRelative("xSignRange"), new GUIContent("X Sign Range", "処理対象に含める頂点のX座標の符号範囲。脚など、左右で円筒が重なりやすい部分の排他処理に用います。通常はプリセットの設定を変更しないでください。"));
