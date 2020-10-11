@@ -9,6 +9,7 @@ Unity上でアバターに衣装を着せるとき、姿勢によって体の各
 効果の例
 
 ![demo01](https://user-images.githubusercontent.com/61717977/95670954-979fd380-0bcc-11eb-89e7-3d16eb204919.gif)
+<!-- ![demo01-001](https://user-images.githubusercontent.com/61717977/95671858-6af0b980-0bd6-11eb-89db-d24d5ebd9b3d.png)![demo01-033](https://user-images.githubusercontent.com/61717977/95671859-6c21e680-0bd6-11eb-8a10-8aa7ff4e82a7.png) -->
 
 ## 動作環境
 
@@ -74,8 +75,10 @@ Unity 2018.4 以降
 - `Is Leaf` : 手足の先など、終端点を超えてスキンの先端まですべての頂点を処理対象に含めるときにチェックします。通常のボーンに沿うような変形とは異なり、開始点に向かって均等に縮められます。
   - 例1 : チェックなし<br>
     ![demo01](https://user-images.githubusercontent.com/61717977/95670954-979fd380-0bcc-11eb-89e7-3d16eb204919.gif)
+    <!-- ![demo01-001](https://user-images.githubusercontent.com/61717977/95671858-6af0b980-0bd6-11eb-89db-d24d5ebd9b3d.png)![demo01-033](https://user-images.githubusercontent.com/61717977/95671859-6c21e680-0bd6-11eb-8a10-8aa7ff4e82a7.png) -->
   - 例2 : チェックあり<br>
     ![demo02](https://user-images.githubusercontent.com/61717977/95670955-98d10080-0bcc-11eb-8eb0-24f249fffbf6.gif)
+    <!-- ![demo02-001](https://user-images.githubusercontent.com/61717977/95671860-6cba7d00-0bd6-11eb-9cf7-258870d9f558.png)![demo02-028](https://user-images.githubusercontent.com/61717977/95671861-6d531380-0bd6-11eb-9a3e-878889cc2390.png) -->
 - `Shape` : 変形の形状。開始点を time=0（左端）、終端点を time=1（右端）とし、縦軸にボーンへの吸着強度（0=最大、1=変形なし）を指定します。
   - 例1<br>
     ![curve-01c](https://user-images.githubusercontent.com/61717977/95670942-91a9f280-0bcc-11eb-9cb7-78cc4393eda1.png)<br>
