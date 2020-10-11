@@ -49,14 +49,14 @@ namespace Chigiri.DietShaper.Editor
                 for (var i=0; i<bones.arraySize; i++)
                 {
                     var bone = bones.GetArrayElementAtIndex(i);
-                    EditorGUI.PropertyField(rect, bone, new GUIContent($"Bones [{i}]", ""));
+                    EditorGUI.PropertyField(rect, bone, new GUIContent($"Bones [{i}]", $"{i}番目のボーン。これらのボーンをつないだ線分または折れ線に向かって周囲の頂点が吸着するように変形されます。通常はプリセットの設定を変更しないでください。"));
                     rect.y += height + spacing;
                 }
-                EditorGUI.PropertyField(rect, property.FindPropertyRelative("xSignRange"), new GUIContent("X Sign Range", ""));
+                EditorGUI.PropertyField(rect, property.FindPropertyRelative("xSignRange"), new GUIContent("X Sign Range", "処理対象に含める頂点のX座標の符号範囲。脚など、左右で円筒が重なりやすい部分の排他処理に用います。通常はプリセットの設定を変更しないでください。"));
                 rect.y += height + spacing;
-                EditorGUI.Slider(rect, property.FindPropertyRelative("startMargin"), 0f, 0.499f, new GUIContent("Start Margin", ""));
+                EditorGUI.Slider(rect, property.FindPropertyRelative("startMargin"), 0f, 0.499f, new GUIContent("Start Margin", "変形範囲を狭くするとき、開始ボーンからの距離を比率で指定します。"));
                 rect.y += height + spacing;
-                EditorGUI.Slider(rect, property.FindPropertyRelative("endMargin"), 0f, 0.499f, new GUIContent("End Margin", ""));
+                EditorGUI.Slider(rect, property.FindPropertyRelative("endMargin"), 0f, 0.499f, new GUIContent("End Margin", "変形範囲を狭くするとき、終端ボーンからの距離を比率で指定します。"));
                 rect.y += height + spacing;
                 EditorGUI.indentLevel--;
             }

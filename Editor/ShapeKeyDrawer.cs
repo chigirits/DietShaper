@@ -55,9 +55,9 @@ namespace Chigiri.DietShaper.Editor
             if (name == "") name = "(empty)";
             var enable = property.FindPropertyRelative("enable");
             if (isLoaded)
-                EditorGUI.PropertyField(rect, enable, new GUIContent(name, ""));
+                EditorGUI.PropertyField(rect, enable, new GUIContent(name, "チェックされているときのみ、このシェイプキーが作成されます。"));
             else
-                EditorGUI.LabelField(rect, new GUIContent(name, ""));
+                EditorGUI.LabelField(rect, new GUIContent(name));
             rect.y += height + spacing;
 
             if (!isLoaded) return;
@@ -65,17 +65,17 @@ namespace Chigiri.DietShaper.Editor
             EditorGUI.BeginDisabledGroup(!enable.boolValue);
             {
                 EditorGUI.indentLevel++;
-                EditorGUI.PropertyField(rect, property.FindPropertyRelative("name"), new GUIContent("Name", ""));
+                EditorGUI.PropertyField(rect, property.FindPropertyRelative("name"), new GUIContent("Name", "作成するシェイプキーの名前。"));
                 rect.y += height + spacing;
-                EditorGUI.Slider(rect, property.FindPropertyRelative("radius"), 0f, 1f, new GUIContent("Radius", ""));
+                EditorGUI.Slider(rect, property.FindPropertyRelative("radius"), 0f, 1f, new GUIContent("Radius", "処理対象に含める範囲を表す円筒の半径。大きすぎると無関係な頂点まで変形されてしまうため、適度な値を設定する必要があります。"));
                 rect.y += height + spacing;
-                EditorGUI.Slider(rect, property.FindPropertyRelative("addNormal"), 0f, 0.1f, new GUIContent("Add Normal", "法線を元にした成分の影響力（単位：メートル）。"));
+                EditorGUI.Slider(rect, property.FindPropertyRelative("addNormal"), 0f, 0.1f, new GUIContent("Add Normal", "法線を元にした成分の影響力（単位：メートル）。通常は 0 にしてください。Shoulder プリセットで、わきの下をボーンとは垂直な方向に移動するために用います。"));
                 rect.y += height + spacing;
-                EditorGUI.PropertyField(rect, property.FindPropertyRelative("isLeaf"), new GUIContent("Is Leaf", ""));
+                EditorGUI.PropertyField(rect, property.FindPropertyRelative("isLeaf"), new GUIContent("Is Leaf", "手足の先など、終端点を超えてスキンの先端まですべての頂点を処理対象に含めるときにチェックします。通常のボーンに沿うような変形とは異なり、開始点に向かって均等に縮められます。"));
                 rect.y += height + spacing;
-                EditorGUI.PropertyField(rect, property.FindPropertyRelative("shape"), new GUIContent("Shape", ""));
+                EditorGUI.PropertyField(rect, property.FindPropertyRelative("shape"), new GUIContent("Shape", "変形の形状。開始点を time=0（左端）、終端点を time=1（右端）とし、縦軸にボーンへの吸着強度（0=最大、1=変形なし）を指定します。"));
                 rect.y += height + spacing;
-                EditorGUI.PropertyField(rect, property.FindPropertyRelative("gizmoColor"), new GUIContent("Gizmo Color", ""));
+                EditorGUI.PropertyField(rect, property.FindPropertyRelative("gizmoColor"), new GUIContent("Gizmo Color", "ギズモの表示色。処理内容への影響はありません。"));
                 rect.y += height + spacing;
 
                 for (var i = 0; i < bodyLines.arraySize; i++)

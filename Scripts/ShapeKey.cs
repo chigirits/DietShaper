@@ -68,7 +68,7 @@ namespace Chigiri.DietShaper
                 radius = 0.13f,
                 gizmoColor = Color.green,
                 bodyLines = new List<BodyLine>{
-                    new BodyLine(0.35f, 0f, SignRange.both, HumanBodyBones.Spine, HumanBodyBones.Chest, HumanBodyBones.Neck)
+                    new BodyLine(0.35f, 0.2f, SignRange.both, HumanBodyBones.Spine, HumanBodyBones.Chest, HumanBodyBones.Neck)
                 }
             },
 

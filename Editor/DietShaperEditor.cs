@@ -105,9 +105,9 @@ namespace Chigiri.DietShaper.Editor
             if (name == "") name = "(empty)";
             var isLoaded = 0 < shapeKey.FindPropertyRelative("bodyLines").arraySize;
             if (isLoaded)
-                EditorGUI.PropertyField(r, enable, new GUIContent(name, ""));
+                EditorGUI.PropertyField(r, enable, new GUIContent(name, "選択中のシェイプキーの詳細設定が下部に表示されます。"));
             else
-                EditorGUI.LabelField(r, new GUIContent(name, ""));
+                EditorGUI.LabelField(r, new GUIContent(name));
             r.y += linePitch;
 
             EditorGUIUtility.labelWidth = orgLabelWidth;
@@ -178,13 +178,13 @@ namespace Chigiri.DietShaper.Editor
 
                 // UI描画
 
-                EditorGUILayout.PropertyField(avatarRoot, new GUIContent("Avatar Root", "操作対象のアバターのルートオブジェクト"));
-                EditorGUILayout.PropertyField(targetRenderer, new GUIContent("Target", "操作対象のSkinnedMeshRenderer"));
-                EditorGUILayout.PropertyField(sourceMesh, new GUIContent("Source Mesh", "オリジナルのメッシュ"));
-                EditorGUILayout.PropertyField(alwaysShowGizmo, new GUIContent("Always Show Gizmo", "非選択状態でもギズモを表示"));
+                EditorGUILayout.PropertyField(avatarRoot, new GUIContent("Avatar Root", "処理対象のアバターのルートオブジェクト。"));
+                EditorGUILayout.PropertyField(targetRenderer, new GUIContent("Target", "処理対象の SkinnedMeshRenderer。Avatar Root に含まれるボーンに関連付けられたオブジェクトを指定する必要があります。"));
+                EditorGUILayout.PropertyField(sourceMesh, new GUIContent("Source Mesh", "オリジナルのメッシュ。Target を変更すると、Target にアタッチされているメッシュがこのフィールドに自動的に指定されます。"));
+                EditorGUILayout.PropertyField(alwaysShowGizmo, new GUIContent("Always Show Gizmo", "チェックすると、この DietShaper がヒエラルキーで非選択状態の間もギズモを表示し続けます。"));
                 reorderableList.DoLayoutList();
 
-                var presetIndex = EditorGUILayout.Popup("Add Shape Key From Preset", -1, ShapeKey.presetKeys);
+                var presetIndex = EditorGUILayout.Popup(new GUIContent("Add Shape Key From Preset", "プリセットを選択するとシェイプキーが追加されます。"), -1, ShapeKey.presetKeys);
                 if (0 <= presetIndex)
                 {
                     var presetKey = ShapeKey.presetKeys[presetIndex];
@@ -260,7 +260,7 @@ namespace Chigiri.DietShaper.Editor
             }
             if (!(avatarRoot.objectReferenceValue as Animator).isHuman)
             {
-                return "Avatar Root に指定されたオブジェクトは Humanoid である必要があります";
+                return "Avatar Root には Humanoid を指定してください";
             }
             if (targetRenderer.objectReferenceValue == null)
             {
@@ -272,7 +272,7 @@ namespace Chigiri.DietShaper.Editor
             }
             if (shapeKeys.arraySize == 0)
             {
-                return "Shape Keys を1つ以上作成してください";
+                return "Add Shape Key From Preset から1つ以上のプリセットを追加してください";
             }
 
             var names = new Dictionary<string, bool>();
@@ -292,7 +292,9 @@ namespace Chigiri.DietShaper.Editor
                     if (name == self.sourceMesh.GetBlendShapeName(j))
                     {
                         return $"Source Mesh には {name} というシェイプキーが既に定義されています。 " +
-                            "名前を変更するか、または処理済みのメッシュが指定されていないかを確認してください";
+                            "処理済みのメッシュが指定されていないかを確認してください。\n" +
+                            "・処理をやり直す場合は、オリジナルのメッシュを指定しなおしてください。\n" +
+                            "・処理済みのメッシュにさらに新しいキーを追加する場合は、名前を変更してください。";
                     }
                 }
             }
