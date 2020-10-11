@@ -36,7 +36,7 @@ Unity 2018.4 以降
 
 1. シーンにアバターモデルを配置してください。可能な限りボーンの Transform を変更せず、TスタンスまたはAスタンスの状態であることが望ましいです。
 2. 「メニュー/Chigiri/DietShaper」を選択すると、ヒエラルキーのトップレベルに DietShaper が配置されます。
-3. DietShaper の `Target` に、操作対象となる SkinnedMeshRenderer（アバターの表情に適用する場合、一般的には Body オブジェクト）を指定してください。
+3. DietShaper の `Target` に、操作対象となる SkinnedMeshRenderer（アバターの体）を指定してください。
 このとき、対象にアタッチされているメッシュが `Source Mesh` に自動的にセットされます。
    
    ![usage-01](https://user-images.githubusercontent.com/61717977/95670934-8b1b7b00-0bcc-11eb-8930-72cd3dda31fb.png)
