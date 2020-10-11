@@ -59,6 +59,7 @@ namespace Chigiri.DietShaper.Editor
             Vector2 qB0;
             Vector2 qB2;
             Vector2 qC;
+            BoneGroup2 altForLinear;
 
             public BoneGroup3(Vector3 pB0, Vector3 pB1, Vector3 pB2)
             {
@@ -82,6 +83,13 @@ namespace Chigiri.DietShaper.Editor
                 qB0 = new Vector2(Vector3.Dot(vB1B0, vX), Vector3.Dot(vB1B0, vY));
                 qB2 = new Vector2(Vector3.Dot(vB1B2, vX), Vector3.Dot(vB1B2, vY));
 
+                if (Mathf.Abs(qB2.y) < 1e-5f)
+                {
+                    // 3ボーンが一直線上に並ぶときは2ボーン処理で代替
+                    altForLinear = new BoneGroup2(pB0, pB2, false);
+                    return;
+                }
+
                 // 5. 次の2直線の交点を C とする。
                 //    - B₀ を通り B₀O と垂直な直線：𝓍 = B₀x
                 //    - B₂ を通り B₂O と垂直な直線：𝓎-B₂y = (-B₂x/B₂y)(𝓍-B₂x)
@@ -93,6 +101,8 @@ namespace Chigiri.DietShaper.Editor
 
             public (Vector3, float, float) NearestPoint(Vector3 pP)
             {
+                if (altForLinear != null) return altForLinear.NearestPoint(pP);
+
                 // 3. P から平面への垂線の足を Pₚ とする（Vector3.ProjectOnPlane を用いて B₁P を投影する）。
                 // 4. 平面上の𝓍・𝓎軸単位ベクトルとの内積から、平面上での B₀, B₂, Pₚ の座標を求める。
                 var vB1P = pP - pB1;
