@@ -21,15 +21,11 @@ namespace Chigiri.DietShaper
 
         public List<HumanBodyBones> bones;
         public SignRange xSignRange;
-        public float startMargin;
-        public float endMargin;
 
         public int _index;
 
-        public BodyLine(float startMargin, float endMargin, SignRange xSignRange, params HumanBodyBones[] bones)
+        public BodyLine(SignRange xSignRange, params HumanBodyBones[] bones)
         {
-            this.startMargin = startMargin;
-            this.endMargin = endMargin;
             this.xSignRange = xSignRange;
             this.bones = new List<HumanBodyBones>(bones);
         }
@@ -98,7 +94,7 @@ namespace Chigiri.DietShaper
             }
         }
 
-        public void DrawGizmos(Animator avatarRoot, float startRadius, float endRadius, bool isLeaf, Color color)
+        public void DrawGizmos(Animator avatarRoot, float startMargin, float endMargin, float startRadius, float endRadius, bool isLeaf, Color color)
         {
             Handles.color = color;
             Gizmos.color = color;

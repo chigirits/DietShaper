@@ -38,6 +38,8 @@ namespace Chigiri.DietShaper.Editor
         static void AddBoneKey(DietShaper p, ShapeKey key, ShapeKey exceptKey, Vector3[] posed, Vector3[] normals, Mesh result)
         {
             if (!key.enable) return;
+            key.shape.preWrapMode = WrapMode.ClampForever;
+            key.shape.postWrapMode = WrapMode.ClampForever;
             var vertices = new Vector3[p.sourceMesh.vertexCount];
             var tr = p.targetRenderer.transform;
             var resolver = new NearestPointResolver(p.avatarRoot, key);

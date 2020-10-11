@@ -59,6 +59,7 @@ namespace Chigiri.DietShaper.Editor
             Vector2 qB0;
             Vector2 qB2;
             Vector2 qC;
+            BoneGroup2 altForLinear;
 
             public BoneGroup3(Vector3 pB0, Vector3 pB1, Vector3 pB2)
             {
@@ -82,6 +83,13 @@ namespace Chigiri.DietShaper.Editor
                 qB0 = new Vector2(Vector3.Dot(vB1B0, vX), Vector3.Dot(vB1B0, vY));
                 qB2 = new Vector2(Vector3.Dot(vB1B2, vX), Vector3.Dot(vB1B2, vY));
 
+                if (Mathf.Abs(qB2.y) < 1e-5f)
+                {
+                    // 3ボーンが一直線上に並ぶときは2ボーン処理で代替
+                    altForLinear = new BoneGroup2(pB0, pB2, false);
+                    return;
+                }
+
                 // 5. 次の2直線の交点を C とする。
                 //    - B₀ を通り B₀O と垂直な直線：𝓍 = B₀x
                 //    - B₂ を通り B₂O と垂直な直線：𝓎-B₂y = (-B₂x/B₂y)(𝓍-B₂x)
@@ -93,6 +101,8 @@ namespace Chigiri.DietShaper.Editor
 
             public (Vector3, float, float) NearestPoint(Vector3 pP)
             {
+                if (altForLinear != null) return altForLinear.NearestPoint(pP);
+
                 // 3. P から平面への垂線の足を Pₚ とする（Vector3.ProjectOnPlane を用いて B₁P を投影する）。
                 // 4. 平面上の𝓍・𝓎軸単位ベクトルとの内積から、平面上での B₀, B₂, Pₚ の座標を求める。
                 var vB1P = pP - pB1;
@@ -147,8 +157,8 @@ namespace Chigiri.DietShaper.Editor
                         var b0 = avatarRoot.GetBoneTransform(b.bones[0]).position;
                         var b1 = avatarRoot.GetBoneTransform(b.bones[1]).position;
                         groups[i] = new BoneGroup2(
-                            Vector3.Lerp(b0, b1, b.startMargin),
-                            Vector3.Lerp(b0, b1, 1f - b.endMargin),
+                            Vector3.Lerp(b0, b1, key.startMargin),
+                            Vector3.Lerp(b0, b1, 1f - key.endMargin),
                             key.isLeaf
                         );
                         break;
@@ -159,9 +169,9 @@ namespace Chigiri.DietShaper.Editor
                         var b1 = avatarRoot.GetBoneTransform(b.bones[1]).position;
                         var b2 = avatarRoot.GetBoneTransform(b.bones[2]).position;
                         groups[i] = new BoneGroup3(
-                            Vector3.Lerp(b0, b1, b.startMargin),
+                            Vector3.Lerp(b0, b1, key.startMargin * 2f),
                             b1,
-                            Vector3.Lerp(b1, b2, 1f - b.endMargin)
+                            Vector3.Lerp(b1, b2, 1f - key.endMargin * 2f)
                         );
                         break;
                     }
@@ -192,8 +202,8 @@ namespace Chigiri.DietShaper.Editor
                 time = t;
                 distance = d;
             }
-            var r = key.shape.Evaluate(time);
-            if (time < 0f || 1f < time && !key.isLeaf) r = 1f;
+            var r = 1f;
+            if (0f <= time && (time <= 1f || key.isLeaf)) r = key.shape.Evaluate(time);
             result = Vector3.Lerp(result, v, r);
             return (result, time, distance);
         }

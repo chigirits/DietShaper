@@ -25,14 +25,12 @@ namespace Chigiri.DietShaper.Editor
             }
             var xSignRangeIndex = Array.IndexOf(Enum.GetValues(typeof(SignRange)), value.xSignRange);
             property.FindPropertyRelative("xSignRange").enumValueIndex = xSignRangeIndex;
-            property.FindPropertyRelative("startMargin").floatValue = value.startMargin;
-            property.FindPropertyRelative("endMargin").floatValue = value.endMargin;
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             var bones = property.FindPropertyRelative("bones");
-            return (height + spacing) * (4 + bones.arraySize) - spacing;
+            return (height + spacing) * (2 + bones.arraySize) - spacing;
         }
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -49,14 +47,10 @@ namespace Chigiri.DietShaper.Editor
                 for (var i=0; i<bones.arraySize; i++)
                 {
                     var bone = bones.GetArrayElementAtIndex(i);
-                    EditorGUI.PropertyField(rect, bone, new GUIContent($"Bones [{i}]", ""));
+                    EditorGUI.PropertyField(rect, bone, new GUIContent($"Bones [{i}]", $"{i}番目のボーン。これらのボーンをつないだ線分または折れ線に向かって周囲の頂点が吸着するように変形されます。通常はプリセットの設定を変更しないでください。"));
                     rect.y += height + spacing;
                 }
-                EditorGUI.PropertyField(rect, property.FindPropertyRelative("xSignRange"), new GUIContent("X Sign Range", ""));
-                rect.y += height + spacing;
-                EditorGUI.Slider(rect, property.FindPropertyRelative("startMargin"), 0f, 0.499f, new GUIContent("Start Margin", ""));
-                rect.y += height + spacing;
-                EditorGUI.Slider(rect, property.FindPropertyRelative("endMargin"), 0f, 0.499f, new GUIContent("End Margin", ""));
+                EditorGUI.PropertyField(rect, property.FindPropertyRelative("xSignRange"), new GUIContent("X Sign Range", "処理対象に含める頂点のX座標の符号範囲。脚など、左右で円筒が重なりやすい部分の排他処理に用います。通常はプリセットの設定を変更しないでください。"));
                 rect.y += height + spacing;
                 EditorGUI.indentLevel--;
             }
