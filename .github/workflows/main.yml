@@ -19,7 +19,7 @@ jobs:
       - name: Prepare Build
         run: |
           mkdir -p project/Assets/Chigiri/DietShaper build
-          cp -a {Editor,Materials,Prefabs,Scripts,README.md}{,.meta} LICENSE project/Assets/Chigiri/DietShaper/
+          cp -a {Editor,Prefabs,Scripts,README.md}{,.meta} LICENSE project/Assets/Chigiri/DietShaper/
 
           cat <<EOT >project/Assets/Chigiri.meta
           fileFormatVersion: 2
