@@ -147,8 +147,8 @@ namespace Chigiri.DietShaper.Editor
                         var b0 = avatarRoot.GetBoneTransform(b.bones[0]).position;
                         var b1 = avatarRoot.GetBoneTransform(b.bones[1]).position;
                         groups[i] = new BoneGroup2(
-                            Vector3.Lerp(b0, b1, b.startMargin),
-                            Vector3.Lerp(b0, b1, 1f - b.endMargin),
+                            Vector3.Lerp(b0, b1, key.startMargin),
+                            Vector3.Lerp(b0, b1, 1f - key.endMargin),
                             key.isLeaf
                         );
                         break;
@@ -159,9 +159,9 @@ namespace Chigiri.DietShaper.Editor
                         var b1 = avatarRoot.GetBoneTransform(b.bones[1]).position;
                         var b2 = avatarRoot.GetBoneTransform(b.bones[2]).position;
                         groups[i] = new BoneGroup3(
-                            Vector3.Lerp(b0, b1, b.startMargin * 2f),
+                            Vector3.Lerp(b0, b1, key.startMargin * 2f),
                             b1,
-                            Vector3.Lerp(b1, b2, 1f - b.endMargin * 2f)
+                            Vector3.Lerp(b1, b2, 1f - key.endMargin * 2f)
                         );
                         break;
                     }
