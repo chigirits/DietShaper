@@ -16,7 +16,7 @@ namespace Chigiri.DietShaper.Editor
         [MenuItem("Chigiri/Create DietShaper")]
         public static void CreateDietShaper()
         {
-            var path = AssetDatabase.GUIDToAssetPath("12c469a9f19e32744a18d7e7eefef715");
+            var path = AssetDatabase.GUIDToAssetPath("c5fad62c586163349acefab2495a2561");
             var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
             var instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
             instance.transform.SetAsLastSibling();
