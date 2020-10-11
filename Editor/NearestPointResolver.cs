@@ -192,8 +192,8 @@ namespace Chigiri.DietShaper.Editor
                 time = t;
                 distance = d;
             }
-            var r = key.shape.Evaluate(Mathf.Clamp(time, 0f, 1f));
-            if (time < 0f || 1f < time && !key.isLeaf) r = 1f;
+            var r = 1f;
+            if (0f <= time && (time <= 1f || key.isLeaf)) r = key.shape.Evaluate(time);
             result = Vector3.Lerp(result, v, r);
             return (result, time, distance);
         }
