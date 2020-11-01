@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System.Linq;
 
 namespace Chigiri.DietShaper.Editor
 {
@@ -43,6 +44,7 @@ namespace Chigiri.DietShaper.Editor
             var vertices = new Vector3[p.sourceMesh.vertexCount];
             var tr = p.targetRenderer.transform;
             var resolver = new NearestPointResolver(p.avatarRoot, key);
+            var verticesToRemove = new bool[p.sourceMesh.vertexCount];
             for (var j = 0; j < p.sourceMesh.vertexCount; j++)
             {
                 var v = tr.TransformPoint(posed[j]);
@@ -50,20 +52,39 @@ namespace Chigiri.DietShaper.Editor
                 var radius = key.radius; // Mathf.Lerp(key.startRadius, key.endRadius, time);
                 if (radius < distance) continue;
                 var w = tr.InverseTransformVector(nearest - v); // 結果の座標差分
+                var r = key.shape.Evaluate(time);
 
                 // 法線をミックス
                 if (0f < key.addNormal && 0f <= time && time <= 1f)
                 {
                     var n = -normals[j].normalized; // 法線の逆方向
                     var nt = n - Vector3.Project(n, w.normalized); // nのwに対して垂直な成分
-                    w += nt * key.addNormal * (1f - key.shape.Evaluate(time));
+                    w += nt * key.addNormal * (1f - r);
                 }
 
                 vertices[j] = w;
+                verticesToRemove[j] = r < key.removeThreshold;
             }
-            result.AddBlendShapeFrame(key.name, 100f, vertices, null, null);
-            //var index = result.GetBlendShapeIndex(key.name);
-            //p.targetRenderer.SetBlendShapeWeight(index, 100f);
+            if (key.removeThreshold < 1.0f) result.AddBlendShapeFrame(key.name, 100f, vertices, null, null);
+
+            if (0.0f < key.removeThreshold)
+            {
+                var srcTriangles = result.triangles;
+                var k = 0;
+                var n = srcTriangles.Length;
+                var triangles = new int[n];
+                for (var i = 0; i < n; i += 3)
+                {
+                    var v0 = srcTriangles[i];
+                    var v1 = srcTriangles[i+1];
+                    var v2 = srcTriangles[i+2];
+                    if (verticesToRemove[v0] && verticesToRemove[v1] && verticesToRemove[v2]) continue;
+                    triangles[k++] = v0;
+                    triangles[k++] = v1;
+                    triangles[k++] = v2;
+                }
+                if (k < result.triangles.Length) result.triangles = triangles.Take(k).ToArray();
+            }
         }
 
         static Mesh DoProcess(DietShaper p)

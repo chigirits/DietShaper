@@ -17,7 +17,7 @@ namespace Chigiri.DietShaper.Editor
         {
             var bodyLines = property.FindPropertyRelative("bodyLines");
             var isLoaded = 0 < bodyLines.arraySize;
-            var h = (height + spacing) * (isLoaded ? 9 : 1);
+            var h = (height + spacing) * (isLoaded ? 10 : 1);
             for (var i = 0; i < bodyLines.arraySize; i++)
             {
                 h += EditorGUI.GetPropertyHeight(bodyLines.GetArrayElementAtIndex(i)) + spacing;
@@ -35,6 +35,7 @@ namespace Chigiri.DietShaper.Editor
             property.FindPropertyRelative("isLeaf").boolValue = value.isLeaf;
             property.FindPropertyRelative("shape").animationCurveValue = value.shape;
             property.FindPropertyRelative("addNormal").floatValue = value.addNormal;
+            property.FindPropertyRelative("removeThreshold").floatValue = value.removeThreshold;
             property.FindPropertyRelative("gizmoColor").colorValue = value.gizmoColor;
             var bodyLines = property.FindPropertyRelative("bodyLines");
             bodyLines.arraySize = value.bodyLines.Count;
@@ -83,6 +84,8 @@ namespace Chigiri.DietShaper.Editor
                 EditorGUI.PropertyField(rect, property.FindPropertyRelative("shape"), new GUIContent("Shape", "変形の形状。開始点を time=0（左端）、終端点を time=1（右端）とし、縦軸にボーンへの吸着強度（0=最大、1=変形なし）を指定します。"));
                 rect.y += height + spacing;
                 EditorGUI.Slider(rect, property.FindPropertyRelative("addNormal"), 0f, 0.1f, new GUIContent("Add Normal", "法線を元にした成分の影響力（単位：メートル）。通常は 0 にしてください。Shoulder プリセットで、わきの下をボーンとは垂直な方向に移動するために用います。"));
+                rect.y += height + spacing;
+                EditorGUI.Slider(rect, property.FindPropertyRelative("removeThreshold"), 0f, 1.0f, new GUIContent("Remove Threshold", "ポリゴンを削除するしきい値。Shape がこの値未満になる範囲のポリゴンを削除します。通常は 0 に設定してください（ポリゴンは一つも削除されません）。1 にした場合、シェイプキーは作成されません。"));
                 rect.y += height + spacing;
                 EditorGUI.PropertyField(rect, property.FindPropertyRelative("gizmoColor"), new GUIContent("Gizmo Color", "ギズモの表示色。処理内容への影響はありません。"));
                 rect.y += height + spacing;

@@ -23,6 +23,7 @@ namespace Chigiri.DietShaper
             new Keyframe(1f, 1f)
         );
         public float addNormal;
+        public float removeThreshold = 0.0f;
         public Color gizmoColor = Color.green;
 
         public static string[] presetKeys = new string[] {
