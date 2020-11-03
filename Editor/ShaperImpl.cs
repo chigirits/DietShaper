@@ -43,8 +43,8 @@ namespace Chigiri.DietShaper.Editor
             key.shape.postWrapMode = WrapMode.ClampForever;
             var vertices = new Vector3[p.sourceMesh.vertexCount];
             var tr = p.targetRenderer.transform;
-            var resolver = new NearestPointResolver(p.avatarRoot, key);
-            var verticesToRemove = new bool[p.sourceMesh.vertexCount];
+            var resolver = new NearestPointResolver(p.avatarRoot, key, p.isGenericMode);
+            var toBeRemoved = new bool[p.sourceMesh.vertexCount];
             for (var j = 0; j < p.sourceMesh.vertexCount; j++)
             {
                 var v = tr.TransformPoint(posed[j]);
@@ -63,12 +63,13 @@ namespace Chigiri.DietShaper.Editor
                 }
 
                 vertices[j] = w;
-                verticesToRemove[j] = r < key.removeThreshold;
+                toBeRemoved[j] = r < key.removeThreshold;
             }
             if (key.removeThreshold < 1.0f) result.AddBlendShapeFrame(key.name, 100f, vertices, null, null);
 
             if (0.0f < key.removeThreshold)
             {
+                // ポリゴン削除
                 var srcTriangles = result.triangles;
                 var k = 0;
                 var n = srcTriangles.Length;
@@ -78,12 +79,12 @@ namespace Chigiri.DietShaper.Editor
                     var v0 = srcTriangles[i];
                     var v1 = srcTriangles[i+1];
                     var v2 = srcTriangles[i+2];
-                    if (verticesToRemove[v0] && verticesToRemove[v1] && verticesToRemove[v2]) continue;
+                    if (toBeRemoved[v0] && toBeRemoved[v1] && toBeRemoved[v2]) continue;
                     triangles[k++] = v0;
                     triangles[k++] = v1;
                     triangles[k++] = v2;
                 }
-                if (k < result.triangles.Length) result.triangles = triangles.Take(k).ToArray();
+                if (k < n) result.triangles = triangles.Take(k).ToArray();
             }
         }
 

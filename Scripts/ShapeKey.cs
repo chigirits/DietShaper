@@ -26,6 +26,8 @@ namespace Chigiri.DietShaper
         public float removeThreshold = 0.0f;
         public Color gizmoColor = Color.green;
 
+        public bool _isGenericMode = false;
+
         public static string[] presetKeys = new string[] {
             "All",
             "---------",
@@ -217,12 +219,25 @@ namespace Chigiri.DietShaper
 
 #if UNITY_EDITOR
 
-        public void DrawGizmos(Animator avatarRoot)
+        public string Validate(Animator avatarRoot, bool isGenericMode, int index)
+        {
+            if (name == "") return $"Shape Keys[{index}] > Name を指定してください";
+            var i = 0;
+            foreach (var bodyLine in bodyLines)
+            {
+                var err = bodyLine.Validate(avatarRoot, isGenericMode, name, i);
+                if (err != "") return err;
+                i++;
+            }
+            return "";
+        }
+
+        public void DrawGizmos(Animator avatarRoot, bool isGenericMode)
         {
             if (!enable) return;
             foreach (var bodyLine in bodyLines)
             {
-                bodyLine.DrawGizmos(avatarRoot, startMargin, endMargin, radius, radius, isLeaf, gizmoColor);
+                bodyLine.DrawGizmos(avatarRoot, startMargin, endMargin, radius, radius, isLeaf, isGenericMode, gizmoColor);
             }
         }
 

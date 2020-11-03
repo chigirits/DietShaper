@@ -43,6 +43,7 @@ namespace Chigiri.DietShaper.Editor
             {
                 var bodyLine = bodyLines.GetArrayElementAtIndex(i);
                 bodyLine.FindPropertyRelative("_index").intValue = i;
+                bodyLine.FindPropertyRelative("_isGenericMode").boolValue = value._isGenericMode;
                 BodyLineDrawer.CopyProperties(bodyLine, value.bodyLines[i]);
             }
         }
@@ -90,10 +91,12 @@ namespace Chigiri.DietShaper.Editor
                 EditorGUI.PropertyField(rect, property.FindPropertyRelative("gizmoColor"), new GUIContent("Gizmo Color", "ギズモの表示色。処理内容への影響はありません。"));
                 rect.y += height + spacing;
 
+                var isGenericMode = property.FindPropertyRelative("_isGenericMode");
                 for (var i = 0; i < bodyLines.arraySize; i++)
                 {
                     var bodyLine = bodyLines.GetArrayElementAtIndex(i);
                     bodyLine.FindPropertyRelative("_index").intValue = i;
+                    bodyLine.FindPropertyRelative("_isGenericMode").boolValue = isGenericMode.boolValue;
                     EditorGUI.PropertyField(rect, bodyLine);
                     rect.y += EditorGUI.GetPropertyHeight(bodyLine) + spacing;
                 }
