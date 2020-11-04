@@ -29,6 +29,10 @@ namespace Chigiri.DietShaper
             {
                 return "Target を指定してください";
             }
+            if (!targetRenderer.transform.IsChildOf(avatarRoot.transform))
+            {
+                return "Target は Avatar Root の階層下にある必要があります";
+            }
             if (sourceMesh == null)
             {
                 return "Source Mesh を指定してください";
