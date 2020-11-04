@@ -47,7 +47,7 @@ namespace Chigiri.DietShaper.Editor
             var toBeRemoved = new bool[p.sourceMesh.vertexCount];
             for (var j = 0; j < p.sourceMesh.vertexCount; j++)
             {
-                var v = tr.TransformPoint(posed[j]);
+                var v = posed[j];
                 var (nearest, time, distance) = resolver.Resolve(v);
                 var radius = key.radius; // Mathf.Lerp(key.startRadius, key.endRadius, time);
                 if (radius < distance) continue;

@@ -88,25 +88,25 @@ public class Helper
             {
                 var p = bindposes[bw.boneIndex0].MultiplyPoint3x4(vertices[i]);
                 var q = bones[bw.boneIndex0].transform.localToWorldMatrix.MultiplyPoint3x4(p);
-                newVert[i] += skin.transform.InverseTransformPoint(q) * bw.weight0;
+                newVert[i] += q * bw.weight0;
             }
             if (Mathf.Abs(bw.weight1) > MIN_VALUE)
             {
                 var p = bindposes[bw.boneIndex1].MultiplyPoint3x4(vertices[i]);
                 var q = bones[bw.boneIndex1].transform.localToWorldMatrix.MultiplyPoint3x4(p);
-                newVert[i] += skin.transform.InverseTransformPoint(q) * bw.weight1;
+                newVert[i] += q * bw.weight1;
             }
             if (Mathf.Abs(bw.weight2) > MIN_VALUE)
             {
                 var p = bindposes[bw.boneIndex2].MultiplyPoint3x4(vertices[i]);
                 var q = bones[bw.boneIndex2].transform.localToWorldMatrix.MultiplyPoint3x4(p);
-                newVert[i] += skin.transform.InverseTransformPoint(q) * bw.weight2;
+                newVert[i] += q * bw.weight2;
             }
             if (Mathf.Abs(bw.weight3) > MIN_VALUE)
             {
                 var p = bindposes[bw.boneIndex3].MultiplyPoint3x4(vertices[i]);
                 var q = bones[bw.boneIndex3].transform.localToWorldMatrix.MultiplyPoint3x4(p);
-                newVert[i] += skin.transform.InverseTransformPoint(q) * bw.weight3;
+                newVert[i] += q * bw.weight3;
             }
 
         }
