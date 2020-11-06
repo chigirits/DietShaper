@@ -53,6 +53,11 @@ namespace Chigiri.DietShaper.Editor
             get { return serializedObject.FindProperty("isGenericMode"); }
         }
 
+        SerializedProperty adjustScale
+        {
+            get { return serializedObject.FindProperty("adjustScale"); }
+        }
+
         SerializedProperty alwaysShowGizmo
         {
             get { return serializedObject.FindProperty("alwaysShowGizmo"); }
@@ -155,8 +160,8 @@ namespace Chigiri.DietShaper.Editor
                 shapeKeys.DeleteArrayElementAtIndex(list.index);
                 if (shapeKeys.arraySize <= list.index) list.index--;
             };
-            reorderableList.onReorderCallback = list => Debug.Log("onReorder");
-            reorderableList.onSelectCallback = list => Debug.Log("onSelect");
+            // reorderableList.onReorderCallback = list => Debug.Log("onReorder");
+            // reorderableList.onSelectCallback = list => Debug.Log("onSelect");
         }
 
         void AddFromPreset(string presetKey)
@@ -187,6 +192,7 @@ namespace Chigiri.DietShaper.Editor
                 EditorGUILayout.PropertyField(targetRenderer, new GUIContent("Target", "処理対象の SkinnedMeshRenderer。Avatar Root に含まれるボーンに関連付けられたオブジェクトを指定する必要があります。"));
                 EditorGUILayout.PropertyField(sourceMesh, new GUIContent("Source Mesh", "オリジナルのメッシュ。Target を変更すると、Target にアタッチされているメッシュがこのフィールドに自動的に指定されます。"));
                 EditorGUILayout.PropertyField(isGenericMode, new GUIContent("Generic Mode", "チェックすると、Generic アバター用にボーンを直接指定するモードになります（Humanoid でも使用できます）。"));
+                EditorGUILayout.PropertyField(adjustScale, new GUIContent("Adjust Scale", "チェックすると、スケールを自動調整します。作成されたシェイプキーの変化量が大きすぎたり小さすぎる場合にお試しください。"));
                 EditorGUILayout.PropertyField(alwaysShowGizmo, new GUIContent("Always Show Gizmo", "チェックすると、この DietShaper がヒエラルキーで非選択状態の間もギズモを表示し続けます。"));
 
                 for (var i = 0; i < shapeKeys.arraySize; i++)

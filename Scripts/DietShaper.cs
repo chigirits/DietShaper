@@ -14,6 +14,7 @@ namespace Chigiri.DietShaper
         public SkinnedMeshRenderer targetRenderer;
         public Mesh sourceMesh;
         public bool isGenericMode;
+        public bool adjustScale;
         public bool alwaysShowGizmo;
         public List<ShapeKey> shapeKeys = new List<ShapeKey> {};
 
