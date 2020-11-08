@@ -86,32 +86,55 @@ public class Helper
 
             if (Mathf.Abs(bw.weight0) > MIN_VALUE)
             {
-                var p = bindposes[bw.boneIndex0].MultiplyPoint3x4(vertices[i]);
-                var q = bones[bw.boneIndex0].transform.localToWorldMatrix.MultiplyPoint3x4(p);
-                newVert[i] += skin.transform.InverseTransformPoint(q) * bw.weight0;
+                var p = bindposes[bw.boneIndex0].MultiplyPoint(vertices[i]);
+                var q = bones[bw.boneIndex0].transform.localToWorldMatrix.MultiplyPoint(p);
+                newVert[i] += q * bw.weight0;
             }
             if (Mathf.Abs(bw.weight1) > MIN_VALUE)
             {
-                var p = bindposes[bw.boneIndex1].MultiplyPoint3x4(vertices[i]);
-                var q = bones[bw.boneIndex1].transform.localToWorldMatrix.MultiplyPoint3x4(p);
-                newVert[i] += skin.transform.InverseTransformPoint(q) * bw.weight1;
+                var p = bindposes[bw.boneIndex1].MultiplyPoint(vertices[i]);
+                var q = bones[bw.boneIndex1].transform.localToWorldMatrix.MultiplyPoint(p);
+                newVert[i] += q * bw.weight1;
             }
             if (Mathf.Abs(bw.weight2) > MIN_VALUE)
             {
-                var p = bindposes[bw.boneIndex2].MultiplyPoint3x4(vertices[i]);
-                var q = bones[bw.boneIndex2].transform.localToWorldMatrix.MultiplyPoint3x4(p);
-                newVert[i] += skin.transform.InverseTransformPoint(q) * bw.weight2;
+                var p = bindposes[bw.boneIndex2].MultiplyPoint(vertices[i]);
+                var q = bones[bw.boneIndex2].transform.localToWorldMatrix.MultiplyPoint(p);
+                newVert[i] += q * bw.weight2;
             }
             if (Mathf.Abs(bw.weight3) > MIN_VALUE)
             {
-                var p = bindposes[bw.boneIndex3].MultiplyPoint3x4(vertices[i]);
-                var q = bones[bw.boneIndex3].transform.localToWorldMatrix.MultiplyPoint3x4(p);
-                newVert[i] += skin.transform.InverseTransformPoint(q) * bw.weight3;
+                var p = bindposes[bw.boneIndex3].MultiplyPoint(vertices[i]);
+                var q = bones[bw.boneIndex3].transform.localToWorldMatrix.MultiplyPoint(p);
+                newVert[i] += q * bw.weight3;
             }
 
         }
 
         return newVert;
+    }
+
+    public void CreateSparseCubes(string name, IEnumerable<Vector3> points, int step)
+    {
+        var result = new GameObject();
+        result.name = name;
+        result.transform.localPosition = Vector3.zero;
+        result.transform.localRotation = Quaternion.identity;
+        result.transform.localScale = Vector3.one;
+        var size = Vector3.one * 0.005f;
+        var i = 0;
+        foreach (var p in points)
+        {
+            if (i % step == 0)
+            {
+                var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                cube.transform.SetParent(result.transform);
+                cube.transform.localPosition = p;
+                cube.transform.localRotation = Quaternion.identity;
+                cube.transform.localScale = size;
+            }
+            i++;
+        }
     }
 
 }

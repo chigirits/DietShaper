@@ -20,17 +20,54 @@ namespace Chigiri.DietShaper
     {
 
         public List<HumanBodyBones> bones;
+        public List<Transform> genericBones;
         public SignRange xSignRange;
 
         public int _index;
+        public bool _isGenericMode = false;
 
         public BodyLine(SignRange xSignRange, params HumanBodyBones[] bones)
         {
             this.xSignRange = xSignRange;
             this.bones = new List<HumanBodyBones>(bones);
+            genericBones = new List<Transform>();
+            for (var i=0; i<bones.Length; i++) genericBones.Add(null);
+        }
+
+        public Transform GetBoneTransform(int index, Animator avatarRoot, bool isGenericMode)
+        {
+            if (isGenericMode)
+            {
+                return index < genericBones.Count ? genericBones[index] : null;
+            }
+            return index < bones.Count ? avatarRoot.GetBoneTransform(bones[index]) : null;
         }
 
 #if UNITY_EDITOR
+
+        public string Validate(Animator avatarRoot, bool isGenericMode, string shapeKeyName, int bodyLineIndex)
+        {
+            if (isGenericMode)
+            {
+                var i = 0;
+                foreach (var genericBone in genericBones)
+                {
+                    if (genericBone == null) return $"{shapeKeyName} > Body Lines[{bodyLineIndex}] > Bones[{i}] を指定してください";
+                    i++;
+                }
+            }
+            else
+            {
+                var i = 0;
+                foreach (var bone in bones)
+                {
+                    var t = avatarRoot.GetBoneTransform(bone);
+                    if (t == null) return $"{shapeKeyName} > Body Lines[{bodyLineIndex}] > Bones[{i}] に対応するボーンが Avatar Root 内に見つかりません。代替となるボーンを選択してください";
+                    i++;
+                }
+            }
+            return "";
+        }
 
         // Reference: https://forum.unity.com/threads/drawing-capsule-gizmo.354634/#post-4100557
         public static void DrawWireTube(Vector3 position, Quaternion rotation, float radius0, float radius1, float height)
@@ -94,7 +131,7 @@ namespace Chigiri.DietShaper
             }
         }
 
-        public void DrawGizmos(Animator avatarRoot, float startMargin, float endMargin, float startRadius, float endRadius, bool isLeaf, Color color)
+        public void DrawGizmos(Animator avatarRoot, float startMargin, float endMargin, float startRadius, float endRadius, bool isLeaf, bool isGenericMode, Color color)
         {
             Handles.color = color;
             Gizmos.color = color;
@@ -103,14 +140,16 @@ namespace Chigiri.DietShaper
             {
                 var radius0 = Mathf.Lerp(startRadius, endRadius, (float)(i-1)/rm);
                 var radius1 = Mathf.Lerp(startRadius, endRadius, (float)i/rm);
-                var bone0 = avatarRoot.GetBoneTransform(bones[i-1]);
-                var bone1 = avatarRoot.GetBoneTransform(bones[i]);
+                var bone0 = GetBoneTransform(i-1, avatarRoot, isGenericMode);
+                var bone1 = GetBoneTransform(i, avatarRoot, isGenericMode);
+                if (bone0 == null || bone1 == null) continue;
                 var b0 = bone0.position;
                 var b1 = bone1.position;
                 var begin = i == 1 ? Vector3.Lerp(b0, b1, startMargin*rm) : b0;
                 var end = i == bones.Count-1 ? Vector3.Lerp(b1, b0, endMargin*rm) : b1;
                 var position = (begin + end) * 0.5f;
                 var beginToEnd = end - begin;
+                if (beginToEnd.sqrMagnitude == 0f) continue; // TODO: 隣接ボーンの座標が完全に一致するときの代替処理
                 var v01 = beginToEnd.normalized;
                 var rot01 = Quaternion.LookRotation(beginToEnd, bone0.up);
                 var length = beginToEnd.magnitude;
@@ -130,9 +169,11 @@ namespace Chigiri.DietShaper
                 // 関節
                 if (i < bones.Count - 1)
                 {
-                    var bone2 = avatarRoot.GetBoneTransform(bones[i+1]);
+                    var bone2 = GetBoneTransform(i+1, avatarRoot, isGenericMode);
+                    if (bone2 == null) continue;
                     var b2 = bone2.position;
                     var v12 = (b2 - b1).normalized;
+                    if (v01 == v12) continue;
                     var rotM = Quaternion.LookRotation(v01-v12, Vector3.Cross(v01, -v12));
                     var rot12 = Quaternion.LookRotation(v12, bone1.up);
                     var angle = 180f - Mathf.Acos(Vector3.Dot(v01, -v12)) * 180f / Mathf.PI;

@@ -142,7 +142,7 @@ namespace Chigiri.DietShaper.Editor
         ShapeKey key;
         BoneGroup[] groups;
 
-        public NearestPointResolver(Animator avatarRoot, ShapeKey key)
+        public NearestPointResolver(Animator avatarRoot, ShapeKey key, bool isGenericMode)
         {
             this.avatarRoot = avatarRoot;
             this.key = key;
@@ -154,8 +154,8 @@ namespace Chigiri.DietShaper.Editor
                 {
                     case 2:
                     {
-                        var b0 = avatarRoot.GetBoneTransform(b.bones[0]).position;
-                        var b1 = avatarRoot.GetBoneTransform(b.bones[1]).position;
+                        var b0 = b.GetBoneTransform(0, avatarRoot, isGenericMode).position;
+                        var b1 = b.GetBoneTransform(1, avatarRoot, isGenericMode).position;
                         groups[i] = new BoneGroup2(
                             Vector3.Lerp(b0, b1, key.startMargin),
                             Vector3.Lerp(b0, b1, 1f - key.endMargin),
@@ -165,9 +165,9 @@ namespace Chigiri.DietShaper.Editor
                     }
                     case 3:
                     {
-                        var b0 = avatarRoot.GetBoneTransform(b.bones[0]).position;
-                        var b1 = avatarRoot.GetBoneTransform(b.bones[1]).position;
-                        var b2 = avatarRoot.GetBoneTransform(b.bones[2]).position;
+                        var b0 = b.GetBoneTransform(0, avatarRoot, isGenericMode).position;
+                        var b1 = b.GetBoneTransform(1, avatarRoot, isGenericMode).position;
+                        var b2 = b.GetBoneTransform(2, avatarRoot, isGenericMode).position;
                         groups[i] = new BoneGroup3(
                             Vector3.Lerp(b0, b1, key.startMargin * 2f),
                             b1,

@@ -8,8 +8,7 @@ Unity上でアバターに衣装を着せるとき、姿勢によって体の各
 
 効果の例
 
-![demo01](https://user-images.githubusercontent.com/61717977/95670954-979fd380-0bcc-11eb-89e7-3d16eb204919.gif)
-<!-- ![demo01-001](https://user-images.githubusercontent.com/61717977/95671858-6af0b980-0bd6-11eb-89db-d24d5ebd9b3d.png)![demo01-033](https://user-images.githubusercontent.com/61717977/95671859-6c21e680-0bd6-11eb-8a10-8aa7ff4e82a7.png) -->
+![demo01-001](https://user-images.githubusercontent.com/61717977/95671858-6af0b980-0bd6-11eb-89db-d24d5ebd9b3d.png)![demo01-033](https://user-images.githubusercontent.com/61717977/95671859-6c21e680-0bd6-11eb-8a10-8aa7ff4e82a7.png)
 
 ## 動作環境
 
@@ -56,9 +55,11 @@ Unity 2018.4 以降
 
 ### DietShaper全体に影響するパラメータ
 
-- `Avatar Root` : 処理対象の Humanoid アバターのルートオブジェクト。
+- `Avatar Root` : 処理対象となるアバターのルートオブジェクト。
 - `Target` : 処理対象の SkinnedMeshRenderer。`Avatar Root` に含まれるボーンに関連付けられたオブジェクトを指定する必要があります。
 - `Source Mesh` : オリジナルのメッシュ。`Target` を変更すると、`Target` にアタッチされているメッシュがこのフィールドに自動的に指定されます。
+- `Generic Mode` : チェックすると、Generic アバター用にボーンを直接指定するモードになります（Humanoid でも使用できます）。
+- `Adjust Scale` : チェックすると、スケールを自動調整します。作成されたシェイプキーの変化量が大きすぎたり小さすぎる場合にお試しください（それでも直らない場合は[注意事項](#注意事項) をお読みください）。
 - `Always Show Gizmo` : チェックすると、この DietShaper がヒエラルキーで非選択状態の間もギズモを表示し続けます。
 
 ### シェイプキーごとに設定するパラメータ
@@ -74,11 +75,9 @@ Unity 2018.4 以降
     ![margin-000-499](https://user-images.githubusercontent.com/61717977/95670951-9373b600-0bcc-11eb-8a70-fc2c67000071.png)
 - `Is Leaf` : 手足の先など、終端点を超えてスキンの先端まですべての頂点を処理対象に含めるときにチェックします。通常のボーンに沿うような変形とは異なり、開始点に向かって均等に縮められます。
   - 例1 : チェックなし<br>
-    ![demo01](https://user-images.githubusercontent.com/61717977/95670954-979fd380-0bcc-11eb-89e7-3d16eb204919.gif)
-    <!-- ![demo01-001](https://user-images.githubusercontent.com/61717977/95671858-6af0b980-0bd6-11eb-89db-d24d5ebd9b3d.png)![demo01-033](https://user-images.githubusercontent.com/61717977/95671859-6c21e680-0bd6-11eb-8a10-8aa7ff4e82a7.png) -->
+    ![demo01-001](https://user-images.githubusercontent.com/61717977/95671858-6af0b980-0bd6-11eb-89db-d24d5ebd9b3d.png)![demo01-033](https://user-images.githubusercontent.com/61717977/95671859-6c21e680-0bd6-11eb-8a10-8aa7ff4e82a7.png)
   - 例2 : チェックあり<br>
-    ![demo02](https://user-images.githubusercontent.com/61717977/95670955-98d10080-0bcc-11eb-8eb0-24f249fffbf6.gif)
-    <!-- ![demo02-001](https://user-images.githubusercontent.com/61717977/95671860-6cba7d00-0bd6-11eb-9cf7-258870d9f558.png)![demo02-028](https://user-images.githubusercontent.com/61717977/95671861-6d531380-0bd6-11eb-9a3e-878889cc2390.png) -->
+    ![demo02-001](https://user-images.githubusercontent.com/61717977/95671860-6cba7d00-0bd6-11eb-9cf7-258870d9f558.png)![demo02-028](https://user-images.githubusercontent.com/61717977/95671861-6d531380-0bd6-11eb-9a3e-878889cc2390.png)
 - `Shape` : 変形の形状。開始点を time=0（左端）、終端点を time=1（右端）とし、縦軸にボーンへの吸着強度（0=最大、1=変形なし）を指定します。
   - 例1<br>
     ![curve-01c](https://user-images.githubusercontent.com/61717977/95670942-91a9f280-0bcc-11eb-9cb7-78cc4393eda1.png)<br>
@@ -94,6 +93,7 @@ Unity 2018.4 以降
     ![normal-off](https://user-images.githubusercontent.com/61717977/95670956-98d10080-0bcc-11eb-91b6-9a22fa70671f.png)
   - 例2 : `Add Normal = 0.05`<br>
     ![normal-on](https://user-images.githubusercontent.com/61717977/95670957-99699700-0bcc-11eb-9ad5-cbd2be4476a6.png)
+- `Remove Threshold` : ポリゴンを削除するしきい値。`Shape` がこの値未満になる範囲のポリゴンを削除します。通常は `0` に設定してください（ポリゴンは一つも削除されません）。`1` にした場合、シェイプキーは作成されません。
 - `Gizmo Color` : ギズモの表示色。処理内容への影響はありません。
 - `Body Lines[i]` : i番目の処理対象ボディライン。左右の腕など、複数のボーンを別々に処理した結果を1つのシェイプキーにするときは2つ以上のボディラインを持ちます。ボディラインの数は変更できません。通常はプリセットの設定を変更しないでください。
   - `Bones[j]` : j番目のボーン。これらのボーンをつないだ線分または折れ線（ボディライン）に向かって周囲の頂点が吸着するように変形されます。ボーンの数は変更できません。通常はプリセットの設定を変更しないでください。
@@ -101,16 +101,26 @@ Unity 2018.4 以降
 
 ### 注意事項
 
+- **`Target` の Transform が本来の（FBXを配置した時点での）値から変更されていると、正常にシェイプキーを作成できません**。既に変更してしまっている場合は `Adjust Scale` をチェックするか、それでも直らない場合は以下の手順に従ってください。
+  
+  1. 大元のFBXをシーンに配置する
+  2. `Source Mesh` と同じメッシュがアタッチされている 1. 中のオブジェクトの Transform 値をコピー（`Copy Component`）
+  3. `Target` の Transform に同じ値を上書き（`Paste Component Values`）
+- アバターの Scale がXYZ各軸で不均等に設定されていると、正常にシェイプキーを作成できません。均等な状態で操作してください。
 - 位置的に隣り合うシェイプキーをウェイト100で重ね掛けすると、重複部分が膨張することがあります。この場合、ウェイトを67程度に調整することでほぼ平均的に細くすることができます。ただし、節ができますので服に隠れることが前提となります。
 
 ## ライセンス
 
-[MIT License](./LICENSE)
+[MIT License](./LICENSE)<br>
+©2020 TSUTSUMI Chigiri
 
 - このソフトウェアは商用・非商用問わず無償で利用できますが、無保証です。利用に際して発生する問題については、作者は一切の責任を負いません。
 - コードを再利用する際は、著作権表示と上記リンク先のライセンス条文を同梱する必要があります。詳しくは条文（英語）をお読みください。
 
 ## 更新履歴
 
+- v1.1.0
+  - メッシュの削除機能（`Remove Threshold` パラメータ追加）
+  - 非Humanoidアバターに対応（`Generic Mode` パラメータ追加）
 - v1.0.0
   - 初回リリース

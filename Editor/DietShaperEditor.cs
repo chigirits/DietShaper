@@ -48,6 +48,16 @@ namespace Chigiri.DietShaper.Editor
             get { return serializedObject.FindProperty("sourceMesh"); }
         }
 
+        SerializedProperty isGenericMode
+        {
+            get { return serializedObject.FindProperty("isGenericMode"); }
+        }
+
+        SerializedProperty adjustScale
+        {
+            get { return serializedObject.FindProperty("adjustScale"); }
+        }
+
         SerializedProperty alwaysShowGizmo
         {
             get { return serializedObject.FindProperty("alwaysShowGizmo"); }
@@ -150,8 +160,8 @@ namespace Chigiri.DietShaper.Editor
                 shapeKeys.DeleteArrayElementAtIndex(list.index);
                 if (shapeKeys.arraySize <= list.index) list.index--;
             };
-            reorderableList.onReorderCallback = list => Debug.Log("onReorder");
-            reorderableList.onSelectCallback = list => Debug.Log("onSelect");
+            // reorderableList.onReorderCallback = list => Debug.Log("onReorder");
+            // reorderableList.onSelectCallback = list => Debug.Log("onSelect");
         }
 
         void AddFromPreset(string presetKey)
@@ -178,10 +188,18 @@ namespace Chigiri.DietShaper.Editor
 
                 // UI描画
 
-                EditorGUILayout.PropertyField(avatarRoot, new GUIContent("Avatar Root", "処理対象の Humanoid アバターのルートオブジェクト。"));
+                EditorGUILayout.PropertyField(avatarRoot, new GUIContent("Avatar Root", "処理対象となるアバターのルートオブジェクト。"));
                 EditorGUILayout.PropertyField(targetRenderer, new GUIContent("Target", "処理対象の SkinnedMeshRenderer。Avatar Root に含まれるボーンに関連付けられたオブジェクトを指定する必要があります。"));
                 EditorGUILayout.PropertyField(sourceMesh, new GUIContent("Source Mesh", "オリジナルのメッシュ。Target を変更すると、Target にアタッチされているメッシュがこのフィールドに自動的に指定されます。"));
+                EditorGUILayout.PropertyField(isGenericMode, new GUIContent("Generic Mode", "チェックすると、Generic アバター用にボーンを直接指定するモードになります（Humanoid でも使用できます）。"));
+                EditorGUILayout.PropertyField(adjustScale, new GUIContent("Adjust Scale", "チェックすると、スケールを自動調整します。作成されたシェイプキーの変化量が大きすぎたり小さすぎる場合にお試しください。"));
                 EditorGUILayout.PropertyField(alwaysShowGizmo, new GUIContent("Always Show Gizmo", "チェックすると、この DietShaper がヒエラルキーで非選択状態の間もギズモを表示し続けます。"));
+
+                for (var i = 0; i < shapeKeys.arraySize; i++)
+                {
+                    var shapeKey = shapeKeys.GetArrayElementAtIndex(i);
+                    shapeKey.FindPropertyRelative("_isGenericMode").boolValue = isGenericMode.boolValue;
+                }
                 reorderableList.DoLayoutList();
 
                 var presetIndex = EditorGUILayout.Popup(new GUIContent("Add Shape Key From Preset", "プリセットを選択するとシェイプキーが追加されます。"), -1, ShapeKey.presetKeys);
@@ -208,7 +226,12 @@ namespace Chigiri.DietShaper.Editor
 
                 // エラー表示
                 EditorGUILayout.Space();
-                var error = Validate();
+                var warnings = new List<string>();
+                var error = self.Validate(warnings);
+                foreach (var warning in warnings)
+                {
+                    EditorGUILayout.HelpBox(Helper.Chomp(warning), MessageType.Warning, true);
+                }
                 if (error != "")
                 {
                     EditorGUILayout.HelpBox(Helper.Chomp(error), MessageType.Error, true);
@@ -250,56 +273,6 @@ namespace Chigiri.DietShaper.Editor
             {
                 self.sourceMesh = self.targetRenderer.sharedMesh;
             }
-        }
-
-        string Validate()
-        {
-            if (avatarRoot.objectReferenceValue == null)
-            {
-                return "Avatar Root を指定してください";
-            }
-            if (!(avatarRoot.objectReferenceValue as Animator).isHuman)
-            {
-                return "Avatar Root には Humanoid を指定してください";
-            }
-            if (targetRenderer.objectReferenceValue == null)
-            {
-                return "Target を指定してください";
-            }
-            if (sourceMesh.objectReferenceValue == null || self.sourceMesh == null)
-            {
-                return "Source Mesh を指定してください";
-            }
-            if (shapeKeys.arraySize == 0)
-            {
-                return "Add Shape Key From Preset から1つ以上のプリセットを追加してください";
-            }
-
-            var names = new Dictionary<string, bool>();
-            for (var i = 0; i < shapeKeys.arraySize; i++)
-            {
-                var shapeKey = shapeKeys.GetArrayElementAtIndex(i);
-                var enable = shapeKey.FindPropertyRelative("enable").boolValue;
-                if (!enable) continue;
-                var name = shapeKey.FindPropertyRelative("name").stringValue;
-                if (names.ContainsKey(name))
-                {
-                    return $"シェイプキー名 {name} が重複しています。異なる名前を指定してください";
-                }
-                names[name] = true;
-                for (var j = 0; j < self.sourceMesh.blendShapeCount; j++)
-                {
-                    if (name == self.sourceMesh.GetBlendShapeName(j))
-                    {
-                        return $"Source Mesh には {name} というシェイプキーが既に定義されています。 " +
-                            "処理済みのメッシュが指定されていないかを確認してください。\n" +
-                            "・処理をやり直す場合は、オリジナルのメッシュを指定しなおしてください。\n" +
-                            "・処理済みのメッシュにさらに新しいキーを追加する場合は、名前を変更してください。";
-                    }
-                }
-            }
-
-            return "";
         }
 
         void RevertTarget()
