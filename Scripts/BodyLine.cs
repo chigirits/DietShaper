@@ -173,6 +173,7 @@ namespace Chigiri.DietShaper
                     if (bone2 == null) continue;
                     var b2 = bone2.position;
                     var v12 = (b2 - b1).normalized;
+                    if (v01 == v12) continue;
                     var rotM = Quaternion.LookRotation(v01-v12, Vector3.Cross(v01, -v12));
                     var rot12 = Quaternion.LookRotation(v12, bone1.up);
                     var angle = 180f - Mathf.Acos(Vector3.Dot(v01, -v12)) * 180f / Mathf.PI;

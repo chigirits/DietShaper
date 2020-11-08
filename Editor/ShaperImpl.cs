@@ -53,6 +53,8 @@ namespace Chigiri.DietShaper.Editor
             var l2ws = p.targetRenderer.localToWorldMatrix.lossyScale;
             var rescale = new Vector3(l2ws.x/avs.x, l2ws.y/avs.y, l2ws.z/avs.z);
             // FIXME: SkinnedMeshRenderer の元々の（FBX内での）Scale を知りたい
+            var rts = p.targetRenderer.rootBone.lossyScale;
+            var rtsInv = new Vector3(1f/rts.x, 1f/rts.y, 1f/rts.z);
             var resolver = new NearestPointResolver(p.avatarRoot, key, p.isGenericMode);
             var rNormal = key.addNormal / avs.magnitude;
             var toBeRemoved = new bool[p.sourceMesh.vertexCount];
@@ -72,7 +74,7 @@ namespace Chigiri.DietShaper.Editor
                 {
                     var n = -normals[j].normalized; // 法線の逆方向
                     var nt = n - Vector3.Project(n, w.normalized); // nのwに対して垂直な成分
-                    w += nt * rNormal * (1f - r);
+                    w += Vector3.Scale(nt * rNormal * (1f - r), rtsInv);
                 }
 
                 vertices[j] = w;
