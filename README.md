@@ -1,4 +1,4 @@
-# DietShaper
+# DietShaper v1.1.0
 
 アバターの腕などを細くするためのシェイプキーを追加し、新しいメッシュとして保存するUnityエディタ拡張です。
 
@@ -18,7 +18,7 @@ Unity 2018.4 以降
 
 ### unitypackageをインポートする方法
 
-[Releasesページ](https://github.com/chigirits/DietShaper/releases) より最新版の `DietShaper-vX.X.X.unitypackage` をダウンロードし、Unityにインポートする
+[Booth](https://chigiri.booth.pm/items/2442610) または [Releasesページ](https://github.com/chigirits/DietShaper/releases) より最新版の `DietShaper-vX.X.X.unitypackage` をダウンロードし、Unityにインポートする
 
 ### パッケージマネージャを用いる方法
 
@@ -122,5 +122,6 @@ Unity 2018.4 以降
 - v1.1.0
   - メッシュの削除機能（`Remove Threshold` パラメータ追加）
   - 非Humanoidアバターに対応（`Generic Mode` パラメータ追加）
+  - SkinnedMeshRenderer の Scale 自動調整（`Adjust Scale` パラメータ追加）
 - v1.0.0
   - 初回リリース
