@@ -20,7 +20,7 @@ namespace Chigiri.DietShaper
 
 #if UNITY_EDITOR
 
-        public string Validate()
+        public string Validate(List<string> warnings)
         {
             if (avatarRoot == null)
             {
@@ -45,6 +45,15 @@ namespace Chigiri.DietShaper
             if (shapeKeys.Count == 0)
             {
                 return "Add Shape Key From Preset から1つ以上のプリセットを追加してください";
+            }
+
+            var ascale = avatarRoot.transform.lossyScale;
+            var rscale = targetRenderer.localToWorldMatrix.lossyScale;
+            if (0.001f < Mathf.Abs(rscale.magnitude / ascale.magnitude - 1f))
+            {
+                warnings.Add("Target のスケールが標準的ではありません。" +
+                    "シェイプキーの変化量が異常になる場合は Adjust Scale をチェックしてください。" +
+                    "それでもうまく行かない場合は、マニュアルの注意事項をお読みください。");
             }
 
             var names = new Dictionary<string, bool>();

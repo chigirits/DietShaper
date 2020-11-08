@@ -226,7 +226,12 @@ namespace Chigiri.DietShaper.Editor
 
                 // エラー表示
                 EditorGUILayout.Space();
-                var error = self.Validate();
+                var warnings = new List<string>();
+                var error = self.Validate(warnings);
+                foreach (var warning in warnings)
+                {
+                    EditorGUILayout.HelpBox(Helper.Chomp(warning), MessageType.Warning, true);
+                }
                 if (error != "")
                 {
                     EditorGUILayout.HelpBox(Helper.Chomp(error), MessageType.Error, true);
