@@ -22,6 +22,7 @@ namespace Chigiri.DietShaper
             new Keyframe(0.8f, 0f),
             new Keyframe(1f, 1f)
         );
+        public float weight = 1.0f;
         public float addNormal;
         public float removeThreshold = 0.0f;
         public Color gizmoColor = Color.green;

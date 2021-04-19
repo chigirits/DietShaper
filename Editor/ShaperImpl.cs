@@ -68,6 +68,7 @@ namespace Chigiri.DietShaper.Editor
                 var w = w2l.MultiplyVector(nearest - v); // 結果の座標差分
                 if (p.adjustScale) w.Scale(rescale);
                 var r = key.shape.Evaluate(time);
+                r = 1 - (1-r) * key.weight;
 
                 // 法線をミックス
                 if (0f < rNormal && 0f <= time && time <= 1f)

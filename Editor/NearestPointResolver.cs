@@ -203,7 +203,11 @@ namespace Chigiri.DietShaper.Editor
                 distance = d;
             }
             var r = 1f;
-            if (0f <= time && (time <= 1f || key.isLeaf)) r = key.shape.Evaluate(time);
+            if (0f <= time && (time <= 1f || key.isLeaf))
+            {
+                r = key.shape.Evaluate(time);
+                r = 1 - (1-r) * key.weight;
+            }
             result = Vector3.Lerp(result, v, r);
             return (result, time, distance);
         }

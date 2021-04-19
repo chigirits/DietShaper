@@ -88,6 +88,7 @@ Unity 2018.4 以降
   - 例3<br>
     ![curve-03c](https://user-images.githubusercontent.com/61717977/95670946-92db1f80-0bcc-11eb-86e4-f3099584e315.png)<br>
     ![curve-03r](https://user-images.githubusercontent.com/61717977/95670947-92db1f80-0bcc-11eb-8056-7d4d57641318.png)
+- `Weight` : 変形の強さ。指定した値が `Shape` の吸着強度に乗算されます。
 - `Add Normal` : 法線を元にした成分の影響力（単位：メートル）。通常は 0 にしてください。Shoulder プリセットで、わきの下をボーンとは垂直な方向に移動するために用います。
   - 例1 : `Add Normal = 0`<br>
     ![normal-off](https://user-images.githubusercontent.com/61717977/95670956-98d10080-0bcc-11eb-91b6-9a22fa70671f.png)
