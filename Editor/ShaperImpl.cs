@@ -42,12 +42,12 @@ namespace Chigiri.DietShaper.Editor
             Selection.activeGameObject = p.targetRenderer.gameObject;
         }
 
-        static void AddBoneKey(DietShaper p, ShapeKey key, ShapeKey exceptKey, Vector3[] posed, Vector3[] normals, Mesh result, List<Vector3> debugPoints)
+        static void AddBoneKey(DietShaper p, ShapeKey key, ShapeKey exceptKey, Vector3[] posed, Vector3[] normals, Mesh mesh, Dictionary<string, Vector3[]> data, List<Vector3> debugPoints)
         {
             if (!key.enable) return;
             key.shape.preWrapMode = WrapMode.ClampForever;
             key.shape.postWrapMode = WrapMode.ClampForever;
-            var vertices = new Vector3[p.sourceMesh.vertexCount];
+            var vertices = data.ContainsKey(key.name) ? data[key.name] : new Vector3[p.sourceMesh.vertexCount];
             var w2l = p.targetRenderer.worldToLocalMatrix;
             var avs = p.avatarRoot.transform.lossyScale;
             var l2ws = p.targetRenderer.localToWorldMatrix.lossyScale;
@@ -78,15 +78,15 @@ namespace Chigiri.DietShaper.Editor
                     w += Vector3.Scale(nt * rNormal * (1f - r), rtsInv);
                 }
 
-                vertices[j] = w;
+                vertices[j] += w;
                 toBeRemoved[j] = r < key.removeThreshold;
             }
-            if (key.removeThreshold < 1.0f) result.AddBlendShapeFrame(key.name, 100f, vertices, null, null);
+            if (key.removeThreshold < 1.0f) data[key.name] = vertices;
 
             if (0.0f < key.removeThreshold)
             {
                 // ポリゴン削除
-                var srcTriangles = result.triangles;
+                var srcTriangles = mesh.triangles;
                 var k = 0;
                 var n = srcTriangles.Length;
                 var triangles = new int[n];
@@ -100,7 +100,7 @@ namespace Chigiri.DietShaper.Editor
                     triangles[k++] = v1;
                     triangles[k++] = v2;
                 }
-                if (k < n) result.triangles = triangles.Take(k).ToArray();
+                if (k < n) mesh.triangles = triangles.Take(k).ToArray();
             }
         }
 
@@ -111,9 +111,15 @@ namespace Chigiri.DietShaper.Editor
             result.name = p.sourceMesh.name;
 
             var debugPoints = new List<Vector3>();
+            var data = new Dictionary<string, Vector3[]>();
             foreach (var key in p.shapeKeys)
             {
-                AddBoneKey(p, key, null, posed, p.sourceMesh.normals, result, debugPoints);
+                AddBoneKey(p, key, null, posed, p.sourceMesh.normals, result, data, debugPoints);
+            }
+
+            foreach (var kv in data)
+            {
+                result.AddBlendShapeFrame(kv.Key, 100f, kv.Value, null, null);
             }
 
             // // 結果を点群でデバッグ表示

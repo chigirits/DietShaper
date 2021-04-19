@@ -56,16 +56,18 @@ namespace Chigiri.DietShaper
                     "それでもうまく行かない場合は、マニュアルの注意事項をお読みください。");
             }
 
-            var names = new Dictionary<string, bool>();
+            var names = new Dictionary<string, int>();
             foreach (var shapeKey in shapeKeys)
             {
                 if (!shapeKey.enable) continue;
                 var name = shapeKey.name;
-                if (names.ContainsKey(name))
+                if (!names.ContainsKey(name)) names[name] = 0;
+                if (names[name] == 1)
                 {
-                    return $"シェイプキー名 {name} が重複しています。異なる名前を指定してください";
+                    warnings.Add($"シェイプキー名 {name} が重複しています。" +
+                        "これらの設定は合成され、単一のシェイプキーとして登録されます。");
                 }
-                names[name] = true;
+                names[name]++;
                 for (var j = 0; j < sourceMesh.blendShapeCount; j++)
                 {
                     if (name == sourceMesh.GetBlendShapeName(j))
